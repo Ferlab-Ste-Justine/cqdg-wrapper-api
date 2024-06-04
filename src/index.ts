@@ -12,7 +12,7 @@ import Keycloak from 'keycloak-connect';
 import { getESIndexByIndex, getExtendedMappingByIndex } from '#src/utils';
 
 import buildApp from './app';
-import { ALLOW_CUSTOM_MAX_DOWNLOAD_ROWS, MAX_DOWNLOAD_ROWS, port, project } from './config/env';
+import { ALLOW_CUSTOM_MAX_DOWNLOAD_ROWS, MAX_DOWNLOAD_ROWS, port } from './config/env';
 import keycloakConfig from './config/keycloak';
 import schema from './graphql/schema';
 import esClient from './services/elasticsearch/client';
@@ -41,14 +41,14 @@ const startApp = async () => {
       ALLOW_CUSTOM_MAX_DOWNLOAD_ROWS,
     });
     await server.start();
-    await app.use(
-      `/${project}/graphql`,
+    app.use(
+      '/graphql',
       cors(),
       express.json({ limit: '50mb' }),
       expressMiddleware(server, { context: resolveContext })
     );
-    await app.use(`/${project}/download` as any, downloadRouter(resolveContext));
-    await httpServer.listen({ port });
+    app.use('/download', downloadRouter(resolveContext));
+    httpServer.listen({ port });
     console.info(`[startApp] 🚀 Server ready on ${port}`);
   } catch (err) {
     console.error('[startApp] err', err);
