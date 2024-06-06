@@ -9,7 +9,7 @@ import { Keycloak } from 'keycloak-connect';
 import NodeCache from 'node-cache';
 
 import packageJson from '../package.json' assert { type: 'json' };
-import { cacheTTL, esHost, isDev, keycloakURL, maxSetContentSize, usersApiURL } from './config/env';
+import { cacheTTL, esHost, keycloakURL, maxSetContentSize, usersApiURL } from './config/env';
 import genomicFeatureSuggestions, { SUGGESTIONS_TYPES } from './endpoints/genomicFeatureSuggestions';
 import { getPhenotypesNodes } from './endpoints/phenotypes';
 import { getStatistics } from './endpoints/statistics';
@@ -54,11 +54,6 @@ const buildApp = (keycloak: Keycloak): Express => {
     })
   );
 
-  /** disable protect to enable graphql playground */
-  if (!isDev) {
-    app.use(keycloak.protect());
-  }
-
   app.use(resolveSetIdMiddleware(usersApiURL));
 
   app.get('/status', (_req, res) =>
@@ -91,7 +86,6 @@ const buildApp = (keycloak: Keycloak): Express => {
   app.get('/sets', async (req, res) => {
     const accessToken = req.headers.authorization;
     const userSets = await getSets(accessToken, usersApiURL);
-
     return res.send(userSets);
   });
 
@@ -107,7 +101,6 @@ const buildApp = (keycloak: Keycloak): Express => {
       schema,
       maxSetContentSize
     );
-
     return res.send(createdSet);
   });
 
@@ -147,7 +140,6 @@ const buildApp = (keycloak: Keycloak): Express => {
     const type: string = req.body.type;
     const aggregations_filter_themselves: boolean = req.body.aggregations_filter_themselves || false;
     const data = await getPhenotypesNodes(sqon, type, aggregations_filter_themselves, accessToken);
-
     return res.send({ data });
   });
 
