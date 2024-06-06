@@ -49,10 +49,7 @@ const FamilyRelationshipsType = new GraphQLObjectType({
     hits: {
       type: FamilyRelationshipsHitsType,
       args: hitsArgsType,
-      resolve: async (parent) => {
-        const results = parent.family_relationships;
-        return { total: results?.length || 0, edges: results || [] };
-      },
+      resolve: async (parent) => ({ total: parent?.length || 0, edges: parent || [] }),
     },
     mapping: { type: GraphQLJSON },
     extended: { type: GraphQLJSON },
