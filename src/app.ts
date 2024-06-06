@@ -4,6 +4,7 @@ import resolveSetIdMiddleware from '@ferlab/next/lib/sqon/resolveSetIdMiddleware
 import compression from 'compression';
 import cors from 'cors';
 import express, { Express } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import { Keycloak } from 'keycloak-connect';
 import NodeCache from 'node-cache';
 
@@ -71,7 +72,7 @@ const buildApp = (keycloak: Keycloak): Express => {
 
   app.post('/cache-clear', keycloak.protect('realm:ADMIN'), async (_req, res) => {
     cache.flushAll();
-    res.send('OK');
+    return res.send('OK');
   });
 
   app.get('/genesFeature/suggestions/:prefix', (req, res) =>
@@ -84,14 +85,14 @@ const buildApp = (keycloak: Keycloak): Express => {
   app.get('/statistics', verifyCache(STATISTICS_CACHE_ID, cache), async (req, res) => {
     const data = await getStatistics();
     cache.set(STATISTICS_CACHE_ID, data);
-    res.json(data);
+    return res.status(StatusCodes.OK).json(data);
   });
 
   app.get('/sets', async (req, res) => {
     const accessToken = req.headers.authorization;
     const userSets = await getSets(accessToken, usersApiURL);
 
-    res.send(userSets);
+    return res.send(userSets);
   });
 
   app.post('/sets', async (req, res) => {
@@ -107,7 +108,7 @@ const buildApp = (keycloak: Keycloak): Express => {
       maxSetContentSize
     );
 
-    res.send(createdSet);
+    return res.send(createdSet);
   });
 
   app.put('/sets/:setId', async (req, res) => {
@@ -130,14 +131,14 @@ const buildApp = (keycloak: Keycloak): Express => {
         maxSetContentSize
       );
     }
-    res.send(updatedSet);
+    return res.send(updatedSet);
   });
 
   app.delete('/sets/:setId', async (req, res) => {
     const accessToken = req.headers.authorization;
     const { setId } = req.params;
     const deletedResult = await deleteSet(accessToken, setId, usersApiURL);
-    res.send(deletedResult);
+    return res.send(deletedResult);
   });
 
   app.post('/phenotypes', async (req, res) => {
@@ -147,7 +148,7 @@ const buildApp = (keycloak: Keycloak): Express => {
     const aggregations_filter_themselves: boolean = req.body.aggregations_filter_themselves || false;
     const data = await getPhenotypesNodes(sqon, type, aggregations_filter_themselves, accessToken);
 
-    res.send({ data });
+    return res.send({ data });
   });
 
   app.use(globalErrorLogger, globalErrorHandler);
