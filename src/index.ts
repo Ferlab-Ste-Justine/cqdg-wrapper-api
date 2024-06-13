@@ -2,6 +2,7 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import downloadRouter from '@ferlab/next/lib/legacy/download';
+import { IQueryContext } from '@ferlab/next/lib/legacy/types';
 import cors from 'cors';
 import express from 'express';
 import http from 'http';
@@ -29,7 +30,7 @@ const startApp = async () => {
         return error;
       },
     });
-    const resolveContext = async (req) => ({
+    const resolveContext = async (req): Promise<IQueryContext> => ({
       auth: req.kauth?.grant?.access_token || {},
       schema,
       esClient,

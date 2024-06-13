@@ -35,6 +35,7 @@ export const studyIdKey = process.env.STUDY_ID_KEY || 'study_id';
 export const participantIdKey = process.env.PARTICIPANT_ID_KEY || 'participant_id';
 export const biospecimenIdKey = process.env.BIOSPECIMEN_ID_KEY || 'sample_id';
 export const variantIdKey = process.env.VARIANT_ID_KEY || 'locus';
+export const geneIdKey = process.env.GENE_ID_KEY || 'alias';
 
 export const participantKey = process.env.TO_PARTICIPANT_ID_KEY || 'participant_id';
 export const participantFileKey = process.env.TO_PARTICIPANT_FILE_ID_KEY || 'files.file_id';
@@ -42,5 +43,5 @@ export const participantBiospecimenKey = process.env.TO_PARTICIPANT_BIOSPECIMEN_
 
 export const cacheTTL: number = Number.parseInt(process.env.CACHE_TTL_SEC) || 3600;
 export const DOWNLOAD_STREAM_BUFFER_SIZE = Number.parseInt(process.env.DOWNLOAD_STREAM_BUFFER_SIZE) || 2000;
-export const ALLOW_CUSTOM_MAX_DOWNLOAD_ROWS = process.env.ALLOW_CUSTOM_MAX_DOWNLOAD_ROWS || false;
+export const ALLOW_CUSTOM_MAX_DOWNLOAD_ROWS = !!process.env.ALLOW_CUSTOM_MAX_DOWNLOAD_ROWS || false;
 export const MAX_DOWNLOAD_ROWS = maxSetContentSize;

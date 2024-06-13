@@ -56,11 +56,8 @@ const BiospecimenHitsType = new GraphQLObjectType({
     total: { type: GraphQLInt },
     edges: {
       type: new GraphQLList(BiospecimenEdgesType),
-      resolve: async (parent, args) =>
-        parent.edges.map((node) => ({
-          searchAfter: args?.searchAfter || [],
-          node,
-        })),
+      resolve: async (parent) =>
+        parent.edges.map((node) => ({ searchAfter: [node?.sample_id?.toLowerCase() || ''], node })),
     },
   }),
 });

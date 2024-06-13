@@ -7,14 +7,14 @@ import {
   hitsArgsType,
   MatchBoxStateType,
 } from '@ferlab/next/lib/common/types';
-import CommonGeneType, { extendedMapping, GeneAggType } from '@ferlab/next/lib/graphql/gene';
+import { extendedMapping, GeneAggType, GeneType as CommonGeneType } from '@ferlab/next/lib/graphql/gene';
 import { getFieldsFromType } from '@ferlab/next/lib/graphql/utils';
 import { GraphQLInt, GraphQLList, GraphQLObjectType } from 'graphql';
 
 import { esGeneIndex } from '#src/config/env';
 
 export const GeneType = new GraphQLObjectType({
-  name: 'Gene',
+  name: 'Gene2',
   fields: () => ({
     ...getFieldsFromType(CommonGeneType),
   }),
@@ -25,7 +25,7 @@ export const GeneType = new GraphQLObjectType({
 });
 
 const GeneEdgesType = new GraphQLObjectType({
-  name: 'GeneEdgesType',
+  name: 'GeneEdgesType2',
   fields: () => ({
     searchAfter: { type: GraphQLJSON },
     node: { type: GeneType },
@@ -33,7 +33,7 @@ const GeneEdgesType = new GraphQLObjectType({
 });
 
 const GeneHitsType = new GraphQLObjectType({
-  name: 'GeneHitsType',
+  name: 'GeneHitsType2',
   fields: () => ({
     total: { type: GraphQLInt },
     edges: {
@@ -44,7 +44,7 @@ const GeneHitsType = new GraphQLObjectType({
 });
 
 const GenesType = new GraphQLObjectType({
-  name: 'GenesType',
+  name: 'GenesType2',
   fields: () => ({
     hits: {
       type: GeneHitsType,

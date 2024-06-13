@@ -31,7 +31,7 @@ export const VariantType = new GraphQLObjectType({
 const VariantEdgesType = new GraphQLObjectType({
   name: 'VariantEdgesType',
   fields: () => ({
-    searchAfter: { type: new GraphQLList(GraphQLInt) },
+    searchAfter: { type: GraphQLJSON },
     node: { type: VariantType },
   }),
 });
@@ -42,7 +42,11 @@ export const VariantHitsType = new GraphQLObjectType({
     total: { type: GraphQLInt },
     edges: {
       type: new GraphQLList(VariantEdgesType),
-      resolve: async (parent, args) => parent.edges.map((node) => ({ searchAfter: args?.searchAfter || [], node })),
+      resolve: async (parent) =>
+        parent.edges.map((node) => ({
+          searchAfter: [node?.max_impact_score, node?.hgvsg, node?.locus],
+          node,
+        })),
     },
   }),
 });
