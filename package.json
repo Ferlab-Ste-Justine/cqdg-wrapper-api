@@ -1,6 +1,6 @@
 {
   "name": "cqdg-wrapper-next",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": ":factory: a data-model aware GraphQL API that sits above an Elasticsearch cluster",
   "main": "src/index.js",
   "type": "module",
@@ -42,7 +42,7 @@
   "dependencies": {
     "@apollo/server": "^4.7.5",
     "@awaitjs/express": "^0.8.0",
-    "@ferlab/next": "^0.0.18",
+    "@ferlab/next": "^0.0.19",
     "@opensearch-project/opensearch": "^2.8.0",
     "compression": "^1.7.4",
     "cors": "2.8.5",

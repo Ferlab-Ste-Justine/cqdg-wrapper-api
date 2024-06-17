@@ -32,7 +32,7 @@ const SexType = new GraphQLEnumType({
 export const ParticipantType = new GraphQLObjectType({
   name: 'Participant',
   fields: () => ({
-    id: { type: GraphQLString, resolve: (parent) => parent.participant_id },
+    id: { type: GraphQLString },
     participant_id: { type: GraphQLString },
     participant_2_id: { type: GraphQLString },
     sex: { type: SexType },

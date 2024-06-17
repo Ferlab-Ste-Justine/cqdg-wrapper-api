@@ -20,7 +20,7 @@ import BiospecimenAgg from './biospecimenAgg';
 export const BiospecimenType = new GraphQLObjectType({
   name: 'BiospecimenType',
   fields: () => ({
-    id: { type: GraphQLString, resolve: (parent) => parent.sample_id },
+    id: { type: GraphQLString },
     biospecimen_id: { type: GraphQLString },
     sample_id: { type: GraphQLString },
     sample_2_id: { type: GraphQLString },

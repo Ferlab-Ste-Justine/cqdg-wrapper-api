@@ -37,7 +37,7 @@ export const DataAccessCodesType = new GraphQLObjectType({
 export const StudyType = new GraphQLObjectType({
   name: 'Study',
   fields: () => ({
-    id: { type: GraphQLString, resolve: (parent) => parent.study_code },
+    id: { type: GraphQLString },
     study_code: { type: GraphQLString },
     study_id: { type: GraphQLString },
     data_category: { type: GraphQLString },

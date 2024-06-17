@@ -21,7 +21,7 @@ import SequencingExperimentType from './sequencingExperiment';
 export const FileType = new GraphQLObjectType({
   name: 'File',
   fields: () => ({
-    id: { type: GraphQLString, resolve: (parent) => parent.file_id },
+    id: { type: GraphQLString },
     file_id: { type: GraphQLString },
     file_2_id: { type: GraphQLString },
     biospecimen_reference: { type: GraphQLString },
