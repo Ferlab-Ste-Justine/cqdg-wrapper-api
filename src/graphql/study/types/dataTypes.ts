@@ -1,3 +1,4 @@
+import { edgesResolver } from '@ferlab/next/lib/common/resolvers';
 import { AggsStateType, ColumnsStateType, hitsArgsType, MatchBoxStateType } from '@ferlab/next/lib/common/types';
 import GraphQLJSON from '@ferlab/next/lib/common/types/jsonType';
 import { GraphQLFloat, GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
@@ -25,7 +26,7 @@ const DataTypeHitsType = new GraphQLObjectType({
     total: { type: GraphQLInt },
     edges: {
       type: new GraphQLList(DataTypeEdgesType),
-      resolve: async (parent, args) => parent.edges.map((node) => ({ searchAfter: args?.searchAfter || [], node })),
+      resolve: (parent) => edgesResolver(parent),
     },
   }),
 });

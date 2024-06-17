@@ -1,3 +1,4 @@
+import { edgesResolver } from '@ferlab/next/lib/common/resolvers';
 import {
   aggregationsType,
   AggsStateType,
@@ -48,7 +49,7 @@ const DiagnosisHitsType = new GraphQLObjectType({
     total: { type: GraphQLInt },
     edges: {
       type: new GraphQLList(DiagnosisEdgesType),
-      resolve: async (parent, args) => parent.edges.map((node) => ({ searchAfter: args?.searchAfter || [], node })),
+      resolve: (parent) => edgesResolver(parent),
     },
   }),
 });

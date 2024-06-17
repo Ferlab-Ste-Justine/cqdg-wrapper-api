@@ -1,4 +1,4 @@
-import { aggsResolver, columnStateResolver, hitsResolver } from '@ferlab/next/lib/common/resolvers';
+import { aggsResolver, columnStateResolver, edgesResolver, hitsResolver } from '@ferlab/next/lib/common/resolvers';
 import {
   aggregationsArgsType,
   AggsStateType,
@@ -20,6 +20,7 @@ export const VariantType = new GraphQLObjectType({
   name: 'Variant',
   fields: () => ({
     ...getFieldsFromType(CommonVariantType),
+    //TODO: use genes from CommonVariantType
     genes: { type: GenesType, resolve: (parent) => parent.genes },
   }),
   extensions: {
@@ -42,11 +43,7 @@ export const VariantHitsType = new GraphQLObjectType({
     total: { type: GraphQLInt },
     edges: {
       type: new GraphQLList(VariantEdgesType),
-      resolve: async (parent) =>
-        parent.edges.map((node) => ({
-          searchAfter: [node?.max_impact_score, node?.hgvsg, node?.locus],
-          node,
-        })),
+      resolve: (parent) => edgesResolver(parent),
     },
   }),
 });

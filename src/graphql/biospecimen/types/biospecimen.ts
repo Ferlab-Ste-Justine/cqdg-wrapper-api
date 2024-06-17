@@ -1,4 +1,4 @@
-import { aggsResolver, columnStateResolver, hitsResolver } from '@ferlab/next/lib/common/resolvers';
+import { aggsResolver, columnStateResolver, edgesResolver, hitsResolver } from '@ferlab/next/lib/common/resolvers';
 import {
   aggregationsArgsType,
   AggsStateType,
@@ -56,8 +56,7 @@ const BiospecimenHitsType = new GraphQLObjectType({
     total: { type: GraphQLInt },
     edges: {
       type: new GraphQLList(BiospecimenEdgesType),
-      resolve: async (parent) =>
-        parent.edges.map((node) => ({ searchAfter: [node?.sample_id?.toLowerCase() || ''], node })),
+      resolve: (parent) => edgesResolver(parent),
     },
   }),
 });

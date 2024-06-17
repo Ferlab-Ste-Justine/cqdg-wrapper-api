@@ -1,3 +1,4 @@
+import { edgesResolver } from '@ferlab/next/lib/common/resolvers';
 import {
   aggregationsType,
   AggsStateType,
@@ -38,7 +39,7 @@ const PhenotypeHitsType = new GraphQLObjectType({
     total: { type: GraphQLInt },
     edges: {
       type: new GraphQLList(PhenotypeEdgesType),
-      resolve: async (parent, args) => parent.edges.map((node) => ({ searchAfter: args?.searchAfter || [], node })),
+      resolve: (parent) => edgesResolver(parent),
     },
   }),
 });
