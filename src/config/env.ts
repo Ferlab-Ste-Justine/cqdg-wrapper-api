@@ -11,6 +11,8 @@ export const keycloakURL = process.env.KEYCLOAK_URL || 'https://auth.qa.juno.cqd
 export const keycloakRealm = process.env.KEYCLOAK_REALM || 'CQDG';
 export const keycloakClient = process.env.KEYCLOAK_CLIENT || 'cqdg-client';
 
+export const ferloadURL = process.env.FERLOAD_URL || 'https://ferload.qa.juno.cqdg.ferlab.bio';
+
 export const esHost = process.env.ES_HOST || 'http://localhost:9200';
 export const esUser = process.env.ES_USER;
 export const esPass = process.env.ES_PASS;

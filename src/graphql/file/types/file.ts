@@ -7,14 +7,15 @@ import {
   MatchBoxStateType,
 } from '@ferlab/next/lib/common/types';
 import GraphQLJSON from '@ferlab/next/lib/common/types/jsonType';
-import { GraphQLFloat, GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
+import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
 
 import { esFileIndex } from '#src/config/env';
 
 import { BiospecimensType } from '../../biospecimen/types/biospecimen';
-import { ParticipantsType } from '../../participant/types/participant';
+import { ParticipantsType, ParticipantType } from '../../participant/types/participant';
 import { StudyType } from '../../study/types/study';
 import extendedMapping from '../extendedMapping';
+import filesResolver, { hitsResolverNested } from '../resolver';
 import FileAgg from './fileAgg';
 import SequencingExperimentType from './sequencingExperiment';
 
@@ -38,7 +39,12 @@ export const FileType = new GraphQLObjectType({
     study_code: { type: GraphQLString },
     study_id: { type: GraphQLString },
     study: { type: StudyType },
-    //todo: create resolve: get participants and samples from participant_index
+    data_access: { type: GraphQLString },
+    user_authorized: { type: GraphQLBoolean },
+    participants_by_index: {
+      type: ParticipantsType,
+      resolve: (parent, args, context) => hitsResolverNested(parent, args, ParticipantType, context.esClient),
+    },
     participants: { type: ParticipantsType },
     biospecimens: { type: BiospecimensType },
     sequencing_experiment: { type: SequencingExperimentType },
@@ -74,7 +80,7 @@ export const FilesType = new GraphQLObjectType({
     hits: {
       type: FileHitsType,
       args: hitsArgsType,
-      resolve: (parent, args, context) => hitsResolver(parent, args, FileType, context.esClient),
+      resolve: (parent, args, context) => filesResolver(parent, args, FileType, context),
     },
     mapping: { type: GraphQLJSON },
     extended: {

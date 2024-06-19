@@ -1,4 +1,16 @@
 export const getBody = ({ field, value, path, nested = false }) => {
+  let must: any = [{ match: { [field]: value } }];
+
+  if (Array.isArray(value)) {
+    must = [
+      {
+        terms: {
+          [field]: value,
+        },
+      },
+    ];
+  }
+
   if (nested) {
     return {
       query: {
@@ -7,7 +19,7 @@ export const getBody = ({ field, value, path, nested = false }) => {
             {
               nested: {
                 path,
-                query: { bool: { must: [{ match: { [field]: value } }] } },
+                query: { bool: { must } },
               },
             },
           ],
@@ -15,15 +27,8 @@ export const getBody = ({ field, value, path, nested = false }) => {
       },
     };
   }
+
   return {
-    query: {
-      bool: {
-        must: [
-          {
-            match: { [field]: value },
-          },
-        ],
-      },
-    },
+    query: { bool: { must } },
   };
 };

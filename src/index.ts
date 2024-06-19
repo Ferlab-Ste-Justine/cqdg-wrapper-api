@@ -46,7 +46,7 @@ const startApp = async () => {
       '/graphql',
       cors(),
       express.json({ limit: '50mb' }),
-      expressMiddleware(server, { context: resolveContext })
+      expressMiddleware(server, { context: ({ req }) => resolveContext(req) })
     );
     app.use('/download', downloadRouter(resolveContext));
     httpServer.listen({ port });
