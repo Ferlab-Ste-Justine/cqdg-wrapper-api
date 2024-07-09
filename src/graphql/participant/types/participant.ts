@@ -67,6 +67,7 @@ export const ParticipantType = new GraphQLObjectType({
   extensions: {
     nestedFields: [
       'files',
+      'files.biospecimens',
       'biospecimens',
       'family_relationships',
       'icd_tagged',

@@ -37,7 +37,17 @@ export const BiospecimenType = new GraphQLObjectType({
     study: { type: StudyType },
   }),
   extensions: {
-    nestedFields: ['files'],
+    nestedFields: [
+      'files',
+      'participant.diagnoses',
+      'participant.family_relationships',
+      'participant.icd_tagged',
+      'participant.mondo',
+      'participant.mondo_tagged',
+      'participant.observed_phenotype_tagged',
+      'participant.observed_phenotypes',
+      'participant.phenotypes_tagged',
+    ],
     esIndex: esBiospecimenIndex,
   },
 });

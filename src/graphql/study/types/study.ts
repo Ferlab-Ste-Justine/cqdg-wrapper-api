@@ -66,7 +66,7 @@ export const StudyType = new GraphQLObjectType({
     experimental_strategies: { type: ExperimentalStrategiesType },
   }),
   extensions: {
-    nestedFields: [],
+    nestedFields: ['data_categories', 'data_types', 'datasets', 'experimental_strategies'],
     esIndex: esStudyIndex,
   },
 });
