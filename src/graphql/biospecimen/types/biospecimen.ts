@@ -67,7 +67,8 @@ export const BiospecimensType = new GraphQLObjectType({
     hits: {
       type: BiospecimenHitsType,
       args: hitsArgsType,
-      resolve: (parent, args, context) => hitsResolver(parent, args, BiospecimenType, context.esClient),
+      resolve: (parent, args, context) =>
+        hitsResolver(parent, args, BiospecimenType, context.esClient, context.devMode),
     },
     mapping: { type: GraphQLJSON },
     extended: {

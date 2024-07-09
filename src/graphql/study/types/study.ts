@@ -96,7 +96,7 @@ const StudiesType = new GraphQLObjectType({
     hits: {
       type: StudiesHitsType,
       args: hitsArgsType,
-      resolve: (parent, args, context) => hitsResolver(parent, args, StudyType, context.esClient),
+      resolve: (parent, args, context) => hitsResolver(parent, args, StudyType, context.esClient, context.devMode),
     },
     mapping: { type: GraphQLJSON },
     extended: {

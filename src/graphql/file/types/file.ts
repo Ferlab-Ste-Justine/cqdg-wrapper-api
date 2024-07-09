@@ -12,7 +12,7 @@ import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLList, GraphQLObjectTyp
 import { esFileIndex } from '#src/config/env';
 
 import { BiospecimensType } from '../../biospecimen/types/biospecimen';
-import { ParticipantsType, ParticipantType } from '../../participant/types/participant';
+import { ParticipantsType } from '../../participant/types/participant';
 import { StudyType } from '../../study/types/study';
 import extendedMapping from '../extendedMapping';
 import filesResolver, { hitsResolverNested } from '../resolver';
@@ -43,7 +43,7 @@ export const FileType = new GraphQLObjectType({
     user_authorized: { type: GraphQLBoolean },
     participants_by_index: {
       type: ParticipantsType,
-      resolve: (parent, args, context) => hitsResolverNested(parent, args, ParticipantType, context.esClient),
+      resolve: (parent, args, context) => hitsResolverNested(parent, args, context.esClient),
     },
     participants: { type: ParticipantsType },
     biospecimens: { type: BiospecimensType },

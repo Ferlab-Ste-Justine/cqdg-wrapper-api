@@ -19,7 +19,7 @@ import DiagnosesType from './diagnoses';
 import FamilyRelationshipsType from './familyRelationships';
 import IcdsType from './icds';
 import ParticipantAgg from './participantAgg';
-import PhenotypesType from './phenotypes';
+import PhenotypesType, { PhenotypeType } from './phenotypes';
 
 const SexType = new GraphQLEnumType({
   name: 'Sex',
@@ -107,7 +107,8 @@ export const ParticipantsType = new GraphQLObjectType({
     hits: {
       type: ParticipantHitsType,
       args: hitsArgsType,
-      resolve: (parent, args, context) => hitsResolver(parent, args, ParticipantType, context.esClient),
+      resolve: (parent, args, context) =>
+        hitsResolver(parent, args, ParticipantType, context.esClient, context.devMode),
     },
     mapping: { type: GraphQLJSON },
     extended: {

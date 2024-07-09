@@ -54,7 +54,7 @@ const VariantsType = new GraphQLObjectType({
     hits: {
       type: VariantHitsType,
       args: hitsArgsType,
-      resolve: (parent, args, context) => hitsResolver(parent, args, VariantType, context.esClient),
+      resolve: (parent, args, context) => hitsResolver(parent, args, VariantType, context.esClient, context.devMode),
     },
     mapping: { type: GraphQLJSON },
     extended: {

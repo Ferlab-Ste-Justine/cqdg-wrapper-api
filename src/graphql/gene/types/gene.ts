@@ -51,7 +51,7 @@ const GenesType = new GraphQLObjectType({
       args: hitsArgsType,
       resolve: (parent, args, context) =>
         //todo: if parent add all parent.gene_ids in sqon to find genes by variant in gene index. Ask link between gene and variant
-        hitsResolver(parent, args, GeneType, context.esClient),
+        hitsResolver(parent, args, GeneType, context.esClient, context.devMode),
     },
     mapping: { type: GraphQLJSON },
     extended: {

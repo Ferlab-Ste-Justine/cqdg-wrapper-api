@@ -11,7 +11,7 @@ import Keycloak from 'keycloak-connect';
 import { getESIndexByIndex, getExtendedMappingByIndex } from '#src/utils';
 
 import buildApp from './app';
-import { ALLOW_CUSTOM_MAX_DOWNLOAD_ROWS, isDev, MAX_DOWNLOAD_ROWS, port } from './config/env';
+import { ALLOW_CUSTOM_MAX_DOWNLOAD_ROWS, devMode, isDev, MAX_DOWNLOAD_ROWS, port } from './config/env';
 import keycloakConfig from './config/keycloak';
 import schema from './graphql/schema';
 import esClient from './services/elasticsearch/client';
@@ -38,6 +38,7 @@ const startApp = async () => {
       getESIndexByIndex,
       MAX_DOWNLOAD_ROWS,
       ALLOW_CUSTOM_MAX_DOWNLOAD_ROWS,
+      devMode,
     });
     await server.start();
     /** disable protect to enable graphql playground */

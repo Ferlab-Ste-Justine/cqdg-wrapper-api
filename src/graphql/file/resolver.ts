@@ -5,7 +5,7 @@ import { ferloadURL } from '#src/config/env';
 
 import ParticipantModel from '../participant/model';
 
-export const hitsResolverNested = async (parent, args, type, esClient) => {
+export const hitsResolverNested = async (parent, args, esClient) => {
   try {
     const participant_ids = parent.participants.map((participant) => participant.participant_id);
 
@@ -26,8 +26,8 @@ export const hitsResolverNested = async (parent, args, type, esClient) => {
 
 const filesResolver = async (parent, args, type, context) => {
   try {
-    const { esClient, auth } = context;
-    const filesHits = await hitsResolver(parent, args, type, esClient);
+    const { esClient, auth, devMode } = context;
+    const filesHits = await hitsResolver(parent, args, type, esClient, devMode);
     const file_ids: string[] = filesHits?.edges.map((file) => file.file_id);
 
     const res = await fetch(`${ferloadURL}/permissions/by-list`, {
