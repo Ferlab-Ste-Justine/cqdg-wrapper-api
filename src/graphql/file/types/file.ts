@@ -10,8 +10,8 @@ import GraphQLJSON from '@ferlab/next/lib/common/types/jsonType';
 import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
 
 import { esFileIndex } from '#src/config/env';
-import { BiospecimensType, BiospecimenType } from '#src/graphql/biospecimen/types/biospecimen';
-import { ParticipantsType, ParticipantType } from '#src/graphql/participant/types/participant';
+import { BiospecimensType } from '#src/graphql/biospecimen/types/biospecimen';
+import { ParticipantsType } from '#src/graphql/participant/types/participant';
 import { StudyType } from '#src/graphql/study/types/study';
 
 import extendedMapping from '../extendedMapping';
@@ -50,7 +50,26 @@ export const FileType = new GraphQLObjectType({
     sequencing_experiment: { type: SequencingExperimentType },
   }),
   extensions: {
-    nestedFields: ['participants', ...ParticipantType.extensions.nestedFields, 'biospecimens', 'biospecimens.files'],
+    nestedFields: [
+      'biospecimens',
+      'biospecimens.participant.diagnoses',
+      'biospecimens.participant.family_relationships',
+      'biospecimens.participant.icd_tagged',
+      'biospecimens.participant.mondo',
+      'biospecimens.participant.mondo_tagged',
+      'biospecimens.participant.observed_phenotype_tagged',
+      'biospecimens.participant.observed_phenotypes',
+      'participants',
+      'participants.biospecimens',
+      'participants.diagnoses',
+      'participants.familyRelationships',
+      'participants.icd_tagged',
+      'participants.mondo',
+      'participants.mondo_tagged',
+      'participants.observed_phenotype_tagged',
+      'participants.observed_phenotypes',
+      'participants.phenotypes_tagged',
+    ],
     esIndex: esFileIndex,
   },
 });

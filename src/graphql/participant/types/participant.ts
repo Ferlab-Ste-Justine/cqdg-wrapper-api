@@ -10,10 +10,10 @@ import GraphQLJSON from '@ferlab/next/lib/common/types/jsonType';
 import { GraphQLBoolean, GraphQLEnumType, GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
 
 import { esParticipantIndex } from '#src/config/env';
+import { BiospecimensType } from '#src/graphql/biospecimen/types/biospecimen';
+import { FilesType } from '#src/graphql/file/types/file';
+import { StudyType } from '#src/graphql/study/types/study';
 
-import { BiospecimensType } from '../../biospecimen/types/biospecimen';
-import { FilesType } from '../../file/types/file';
-import { StudyType } from '../../study/types/study';
 import extendedMapping from '../extendedMapping';
 import DiagnosesType from './diagnoses';
 import FamilyRelationshipsType from './familyRelationships';

@@ -10,8 +10,8 @@ import GraphQLJSON from '@ferlab/next/lib/common/types/jsonType';
 import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
 
 import { esStudyIndex } from '#src/config/env';
+import DataSetsType from '#src/graphql/file/types/dataSets';
 
-import DataSetsType from '../../file/types/dataSets';
 import extendedMapping from '../extendedMapping';
 import DataCategoriesType from './dataCategories';
 import DataTypesType from './dataTypes';
