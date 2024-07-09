@@ -6,7 +6,7 @@ export const project = process.env.PROJECT || 'cqdg';
 export const port = process.env.PORT || 5050;
 export const env = process.env.NODE_ENV || 'production';
 export const isDev = env === 'development';
-export const devMode = !!process.env.DEV_MODE || false;
+export const devMode = process.env.DEV_MODE === 'true' || false;
 
 export const keycloakURL = process.env.KEYCLOAK_URL || 'https://auth.qa.juno.cqdg.ferlab.bio';
 export const keycloakRealm = process.env.KEYCLOAK_REALM || 'CQDG';

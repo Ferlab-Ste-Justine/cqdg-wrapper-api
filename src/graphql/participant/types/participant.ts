@@ -19,7 +19,7 @@ import DiagnosesType from './diagnoses';
 import FamilyRelationshipsType from './familyRelationships';
 import IcdsType from './icds';
 import ParticipantAgg from './participantAgg';
-import PhenotypesType, { PhenotypeType } from './phenotypes';
+import PhenotypesType from './phenotypes';
 
 const SexType = new GraphQLEnumType({
   name: 'Sex',

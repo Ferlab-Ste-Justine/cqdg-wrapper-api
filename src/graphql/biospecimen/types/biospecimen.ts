@@ -18,7 +18,7 @@ import extendedMapping from '../extendedMapping';
 import BiospecimenAgg from './biospecimenAgg';
 
 export const BiospecimenType = new GraphQLObjectType({
-  name: 'BiospecimenType',
+  name: 'Biospecimen',
   fields: () => ({
     id: { type: GraphQLString },
     biospecimen_id: { type: GraphQLString },

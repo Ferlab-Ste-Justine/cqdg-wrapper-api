@@ -1,4 +1,4 @@
-import { aggsResolver, columnStateResolver, edgesResolver, hitsResolver } from '@ferlab/next/lib/common/resolvers';
+import { aggsResolver, columnStateResolver, edgesResolver } from '@ferlab/next/lib/common/resolvers';
 import {
   aggregationsArgsType,
   AggsStateType,
@@ -10,10 +10,10 @@ import GraphQLJSON from '@ferlab/next/lib/common/types/jsonType';
 import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
 
 import { esFileIndex } from '#src/config/env';
+import { BiospecimensType, BiospecimenType } from '#src/graphql/biospecimen/types/biospecimen';
+import { ParticipantsType, ParticipantType } from '#src/graphql/participant/types/participant';
+import { StudyType } from '#src/graphql/study/types/study';
 
-import { BiospecimensType } from '../../biospecimen/types/biospecimen';
-import { ParticipantsType } from '../../participant/types/participant';
-import { StudyType } from '../../study/types/study';
 import extendedMapping from '../extendedMapping';
 import filesResolver, { hitsResolverNested } from '../resolver';
 import FileAgg from './fileAgg';
@@ -50,7 +50,7 @@ export const FileType = new GraphQLObjectType({
     sequencing_experiment: { type: SequencingExperimentType },
   }),
   extensions: {
-    nestedFields: ['participants', 'biospecimens'],
+    nestedFields: ['participants', ...ParticipantType.extensions.nestedFields, 'biospecimens', 'biospecimens.files'],
     esIndex: esFileIndex,
   },
 });

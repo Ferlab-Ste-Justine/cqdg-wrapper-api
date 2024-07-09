@@ -14,7 +14,7 @@ import { GraphQLInt, GraphQLList, GraphQLObjectType } from 'graphql';
 import { esGeneIndex } from '#src/config/env';
 
 export const GeneType = new GraphQLObjectType({
-  name: 'Gene2',
+  name: 'Gene',
   fields: () => ({
     ...getFieldsFromType(CommonGeneType),
   }),
@@ -25,7 +25,7 @@ export const GeneType = new GraphQLObjectType({
 });
 
 const GeneEdgesType = new GraphQLObjectType({
-  name: 'GeneEdgesType2',
+  name: 'GeneEdgesType',
   fields: () => ({
     searchAfter: { type: GraphQLJSON },
     node: { type: GeneType },
@@ -33,7 +33,7 @@ const GeneEdgesType = new GraphQLObjectType({
 });
 
 const GeneHitsType = new GraphQLObjectType({
-  name: 'GeneHitsType2',
+  name: 'GeneHitsType',
   fields: () => ({
     total: { type: GraphQLInt },
     edges: {
@@ -44,7 +44,7 @@ const GeneHitsType = new GraphQLObjectType({
 });
 
 const GenesType = new GraphQLObjectType({
-  name: 'GenesType2',
+  name: 'GenesType',
   fields: () => ({
     hits: {
       type: GeneHitsType,

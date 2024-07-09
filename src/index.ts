@@ -16,6 +16,8 @@ import keycloakConfig from './config/keycloak';
 import schema from './graphql/schema';
 import esClient from './services/elasticsearch/client';
 
+console.log(devMode);
+
 const startApp = async () => {
   try {
     const keycloak = new Keycloak({}, keycloakConfig);
