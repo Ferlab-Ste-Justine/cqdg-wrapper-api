@@ -17,16 +17,22 @@ import studyExtendedMapping from '#src/graphql/study/extendedMapping';
 export const getExtendedMappingByIndex = (graphqlIndex = '') => {
   switch (graphqlIndex) {
     case 'Participant':
+    case 'participant':
       return participantExtendedMapping;
     case 'Biospecimen':
+    case 'biospecimen':
       return sampleExtendedMapping;
     case 'File':
+    case 'file':
       return fileExtendedMapping;
     case 'Variant':
+    case 'variant':
       return variantExtendedMapping;
     case 'Gene':
+    case 'gene':
       return geneExtendedMapping;
     case 'Study':
+    case 'study':
       return studyExtendedMapping;
   }
 };
