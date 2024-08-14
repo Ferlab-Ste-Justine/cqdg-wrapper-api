@@ -38,9 +38,6 @@ const buildApp = (keycloak: Keycloak): Express => {
   );
   app.use(injectBodyHttpHeaders());
 
-  /** disable protect to enable graphql playground */
-  if (!isDev) app.use(keycloak.protect());
-
   /** Update the validateGrant to Provides more logging/information
    * on the reason the token is rejected by keycloak **/
   // const k: any = keycloak;
