@@ -9,7 +9,8 @@ import { Keycloak } from 'keycloak-connect';
 import NodeCache from 'node-cache';
 
 import packageJson from '../package.json' assert { type: 'json' };
-import { cacheTTL, esHost, keycloakURL, maxSetContentSize, usersApiURL } from './config/env';
+import { cacheTTL, esHost, isDev, keycloakURL, maxSetContentSize, usersApiURL } from './config/env';
+import { getExtendedMapping } from './endpoints/extendedMapping';
 import genomicFeatureSuggestions, { SUGGESTIONS_TYPES } from './endpoints/genomicFeatureSuggestions';
 import { getPhenotypesNodes } from './endpoints/phenotypes';
 import { getStatistics } from './endpoints/statistics';
@@ -141,6 +142,10 @@ const buildApp = (keycloak: Keycloak): Express => {
     const aggregations_filter_themselves: boolean = req.body.aggregations_filter_themselves || false;
     const data = await getPhenotypesNodes(sqon, type, aggregations_filter_themselves, accessToken);
     return res.send({ data });
+  });
+
+  app.get('/extendedMapping/:index', keycloak.protect(), async (req, res) => {
+    return getExtendedMapping(req, res);
   });
 
   app.use(globalErrorLogger, globalErrorHandler);
