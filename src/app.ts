@@ -1,5 +1,4 @@
-import { createSet, deleteSet, getSets, SubActionTypes, updateSetContent, updateSetTag } from '@ferlab/next/lib/sets';
-import { CreateSetBody, Set, SetSqon, UpdateSetContentBody, UpdateSetTagBody } from '@ferlab/next/lib/sets/types';
+import { SetSqon } from '@ferlab/next/lib/sets/types';
 import resolveSetIdMiddleware from '@ferlab/next/lib/sqon/resolveSetIdMiddleware';
 import compression from 'compression';
 import cors from 'cors';
@@ -9,17 +8,15 @@ import { Keycloak } from 'keycloak-connect';
 import NodeCache from 'node-cache';
 
 import packageJson from '../package.json' assert { type: 'json' };
-import { cacheTTL, esHost, isDev, keycloakURL, maxSetContentSize, usersApiURL } from './config/env';
+import { cacheTTL, esHost, keycloakURL, usersApiURL } from './config/env';
 import { getExtendedMapping } from './endpoints/extendedMapping';
 import genomicFeatureSuggestions, { SUGGESTIONS_TYPES } from './endpoints/genomicFeatureSuggestions';
 import { getPhenotypesNodes } from './endpoints/phenotypes';
 import { getStatistics } from './endpoints/statistics';
-import schema from './graphql/schema';
 import { STATISTICS_CACHE_ID, verifyCache } from './middleware/cache';
 import { injectBodyHttpHeaders } from './middleware/injectBodyHttpHeaders';
-import esClient from './services/elasticsearch/client';
+import setsRouter from './routes/sets';
 import { globalErrorHandler, globalErrorLogger } from './utils/errors';
-
 const { dependencies, version } = packageJson;
 
 const buildApp = (keycloak: Keycloak): Express => {
@@ -84,56 +81,7 @@ const buildApp = (keycloak: Keycloak): Express => {
     return res.status(StatusCodes.OK).json(data);
   });
 
-  app.get('/sets', async (req, res) => {
-    const accessToken = req.headers.authorization;
-    const userSets = await getSets(accessToken, usersApiURL);
-    return res.send(userSets);
-  });
-
-  app.post('/sets', async (req, res) => {
-    const accessToken = req.headers.authorization;
-    const userId = req['kauth']?.grant?.access_token?.content?.sub;
-    const createdSet = await createSet(
-      req.body as CreateSetBody,
-      accessToken,
-      userId,
-      usersApiURL,
-      esClient,
-      schema,
-      maxSetContentSize
-    );
-    return res.send(createdSet);
-  });
-
-  app.put('/sets/:setId', async (req, res) => {
-    const requestBody: UpdateSetTagBody | UpdateSetContentBody = req.body as any;
-    const accessToken = req.headers.authorization;
-    const userId = req['kauth']?.grant?.access_token?.content?.sub;
-    const { setId } = req.params;
-    let updatedSet: Set;
-    if (requestBody.subAction === SubActionTypes.RENAME_TAG) {
-      updatedSet = await updateSetTag(requestBody as UpdateSetTagBody, accessToken, userId, setId, usersApiURL);
-    } else {
-      updatedSet = await updateSetContent(
-        requestBody as UpdateSetContentBody,
-        accessToken,
-        userId,
-        setId,
-        esClient,
-        schema,
-        usersApiURL,
-        maxSetContentSize
-      );
-    }
-    return res.send(updatedSet);
-  });
-
-  app.delete('/sets/:setId', async (req, res) => {
-    const accessToken = req.headers.authorization;
-    const { setId } = req.params;
-    const deletedResult = await deleteSet(accessToken, setId, usersApiURL);
-    return res.send(deletedResult);
-  });
+  app.use('/sets', setsRouter);
 
   app.post('/phenotypes', async (req, res) => {
     const accessToken = req.headers.authorization;
