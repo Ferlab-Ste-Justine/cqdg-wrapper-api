@@ -1,4 +1,3 @@
-import { SetSqon } from '@ferlab/next/lib/sets/types';
 import resolveSetIdMiddleware from '@ferlab/next/lib/sqon/resolveSetIdMiddleware';
 import compression from 'compression';
 import cors from 'cors';
@@ -6,6 +5,8 @@ import express, { Express } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { Keycloak } from 'keycloak-connect';
 import NodeCache from 'node-cache';
+
+import { SetSqon } from '#src/services/sets/types';
 
 import packageJson from '../package.json' assert { type: 'json' };
 import { cacheTTL, esHost, keycloakURL, usersApiURL } from './config/env';
