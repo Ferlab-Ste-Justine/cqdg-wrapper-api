@@ -2,7 +2,7 @@ import { createSet, deleteSet, getSets, SubActionTypes, updateSetContent, update
 import { CreateSetBody, Set, UpdateSetContentBody, UpdateSetTagBody } from '@ferlab/next/lib/sets/types';
 import express from 'express';
 
-import { maxSetContentSize, usersApiURL } from '#src/config/env';
+import { esFileIndex, maxSetContentSize, usersApiURL } from '#src/config/env';
 import schema from '#src/graphql/schema';
 import esClient from '#src/services/elasticsearch/client';
 
@@ -24,7 +24,8 @@ router.post('/', async (req, res) => {
     usersApiURL,
     esClient,
     schema,
-    maxSetContentSize
+    maxSetContentSize,
+    esFileIndex
   );
   return res.send(createdSet);
 });
