@@ -1,16 +1,17 @@
-import { createSet, deleteSet, getSets, SubActionTypes, updateSetContent, updateSetTag } from '@ferlab/next/lib/sets';
-import { Set, UpdateSetContentBody, UpdateSetTagBody } from '@ferlab/next/lib/sets/types';
 import { jest } from '@jest/globals';
 import { Express } from 'express';
 import Keycloak from 'keycloak-connect';
 import request from 'supertest';
+
+import { createSet, deleteSet, getSets, SubActionTypes, updateSetContent, updateSetTag } from '#src/services/sets';
+import { Set, UpdateSetContentBody, UpdateSetTagBody } from '#src/services/sets/types';
 
 import buildApp from './app';
 import { keycloakClient, keycloakRealm, keycloakURL } from './config/env';
 import { getStatistics, Statistics } from './endpoints/statistics';
 import { getToken, publicKey } from './utils/authTestUtils';
 
-jest.mock('@ferlab/next/lib/sets/index');
+jest.mock('#src/services/sets/index');
 jest.mock('./endpoints/statistics');
 
 //todo: fix tests

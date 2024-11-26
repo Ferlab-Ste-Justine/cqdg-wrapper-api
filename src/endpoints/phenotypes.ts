@@ -1,14 +1,13 @@
-import { SetSqon } from '@ferlab/next/lib/sets/types';
 import searchSqon from '@ferlab/next/lib/sqon/searchSqon';
 import { replaceSetByIds } from '@ferlab/next/lib/sqon/setSqon';
 import get from 'lodash/get';
 
+import { participantBiospecimenKey, participantFileKey, participantKey } from '#src/config/env';
+import { maxSetContentSize, participantIdKey, usersApiURL } from '#src/config/env';
+import runQuery from '#src/graphql/runQuery';
 import schema from '#src/graphql/schema';
 import esClient from '#src/services/elasticsearch/client';
-
-import { participantBiospecimenKey, participantFileKey, participantKey } from '../config/env';
-import { maxSetContentSize, participantIdKey, usersApiURL } from '../config/env';
-import runQuery from '../graphql/runQuery';
+import { SetSqon } from '#src/services/sets/types';
 
 const getPathToParticipantId = (type: string) => {
   if (type === 'biospecimen') {

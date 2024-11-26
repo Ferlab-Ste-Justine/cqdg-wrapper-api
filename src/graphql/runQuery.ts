@@ -1,8 +1,9 @@
-import { SetSqon, Sort } from '@ferlab/next/lib/sets/types';
 import { graphql } from 'graphql';
 import { ExecutionResult } from 'graphql/execution/execute';
 
-import esClient from '../services/elasticsearch/client';
+import esClient from '#src/services/elasticsearch/client';
+import { SetSqon, Sort } from '#src/services/sets/types';
+
 import schema from './schema';
 
 interface IrunQuery {
