@@ -58,7 +58,7 @@ const extendedMapping = [
     field: 'files.biospecimen_reference',
     displayName: 'Files Biospecimen Reference',
     active: false,
-    isArray: false,
+    isArray: true,
     rangeStep: 1,
     type: 'keyword',
     gqlId: 'cqdg::Biospecimen::extended::files.biospecimen_reference',

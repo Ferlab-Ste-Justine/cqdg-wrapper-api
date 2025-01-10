@@ -1,9 +1,11 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql';
+import { GraphQLList } from "graphql/index";
 
 const SequencingExperimentType = new GraphQLObjectType({
   name: 'SequencingExperimentType',
   fields: () => ({
     alir: { type: GraphQLString },
+    analysis_files: { type: new GraphQLList(AnalysisFilesType) },
     analysis_id: { type: GraphQLString },
     bio_informatic_analysis: { type: GraphQLString },
     capture_kit: { type: GraphQLString },
@@ -25,6 +27,14 @@ const SequencingExperimentType = new GraphQLObjectType({
     type_of_sequencing: { type: GraphQLString },
     workflow_name: { type: GraphQLString },
     workflow_version: { type: GraphQLString },
+  }),
+});
+
+const AnalysisFilesType = new GraphQLObjectType({
+  name: 'AnalysisFilesType',
+  fields: () => ({
+    data_type: { type: GraphQLString },
+    file_id: { type: GraphQLString },
   }),
 });
 

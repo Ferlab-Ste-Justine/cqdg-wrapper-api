@@ -463,7 +463,7 @@ const extendedMapping: I_ExtendedMappingSetFieldInput[] = [
     field: 'files.biospecimen_reference',
     displayName: 'Files Biospecimen Reference',
     active: false,
-    isArray: false,
+    isArray: true,
     rangeStep: 1,
     type: 'keyword',
     gqlId: 'cqdg::Participant::extended::files.biospecimen_reference',
