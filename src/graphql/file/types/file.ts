@@ -25,7 +25,7 @@ export const FileType = new GraphQLObjectType({
     id: { type: GraphQLString },
     file_id: { type: GraphQLString },
     file_2_id: { type: GraphQLString },
-    biospecimen_reference: { type: GraphQLString },
+    biospecimen_reference: { type: new GraphQLList(GraphQLString) },
     data_category: { type: GraphQLString },
     data_type: { type: GraphQLString },
     dataset: { type: GraphQLString },
