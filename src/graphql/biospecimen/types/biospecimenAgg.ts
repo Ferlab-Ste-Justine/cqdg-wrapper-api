@@ -7,7 +7,6 @@ const BiospecimenAgg = new GraphQLObjectType({
     age_biospecimen_collection: { type: AggregationsType },
     biospecimen_id: { type: AggregationsType },
     biospecimen_tissue_source: { type: AggregationsType },
-    files__biospecimen_reference: { type: AggregationsType },
     files__data_category: { type: AggregationsType },
     files__data_type: { type: AggregationsType },
     files__dataset: { type: AggregationsType },
