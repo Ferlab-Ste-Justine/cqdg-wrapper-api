@@ -13,8 +13,8 @@ Arranger server is an application that wraps Elasticsearch and provides a GraphQ
 
 ## Development
 
-* Edit start.sh
-* Execute: `sh start.sh`
+* complete your .env file
+* Execute: `npm run dev`
 
 ## Test build and Start
 
