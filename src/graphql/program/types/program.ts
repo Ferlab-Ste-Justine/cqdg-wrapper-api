@@ -41,16 +41,7 @@ export const ProgramType = new GraphQLObjectType({
 
     participants_count: {
       type: GraphQLInt,
-      resolve: async (parent, args, context) => {
-        const { study_codes } = parent;
-        const res = await Promise.all(
-          study_codes.map((study_code) => {
-            return participantsCountResolver(study_code, args, context.esClient);
-          })
-        );
-        const participants_count = res.reduce((acc, curr) => acc + curr, 0);
-        return participants_count;
-      },
+      resolve: participantsCountResolver,
     },
   }),
   extensions: {
@@ -85,6 +76,7 @@ const ProgramsType = new GraphQLObjectType({
       type: ProgramsHitsType,
       args: hitsArgsType,
       // resolve: (parent, args, context) => hitsResolver(parent, args, ProgramType, context.esClient, context.devMode),
+      //TODO: To replace by row behind once data is available on els
       resolve: () => programsData,
     },
     mapping: { type: GraphQLJSON },

@@ -1,16 +1,24 @@
 import ParticipantModel from '../participant/model';
 
-export const participantsCountResolver = async (study_codes, args, esClient) => {
+export const participantsCountResolver = async (parent, args, context) => {
   try {
-    const results = await ParticipantModel.getCount({
-      field: 'study_code',
-      value: study_codes,
-      path: '',
-      args,
-      esClient,
-    });
+    const { study_codes } = parent;
+    const { esClient } = context;
 
-    return results;
+    const res = await Promise.all(
+      study_codes?.map((study_code) => {
+        return ParticipantModel.getCount({
+          field: 'study_code',
+          value: study_code,
+          path: '',
+          args,
+          esClient,
+        });
+      })
+    );
+
+    const participants_count = res.reduce((acc, curr) => acc + curr, 0);
+    return participants_count;
   } catch (error) {
     console.error('participantsCountResolver error', error);
     return null;
