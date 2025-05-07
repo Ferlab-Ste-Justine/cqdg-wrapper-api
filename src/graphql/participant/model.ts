@@ -10,7 +10,7 @@ const get = async (participant_id, esClient) => {
   return body._source;
 };
 
-interface IgetBy {
+interface IGetArgs {
   field: string;
   value: string | string[];
   path?: string;
@@ -18,7 +18,7 @@ interface IgetBy {
   esClient: Client;
 }
 
-const getBy = async ({ field, value, path, args, esClient }: IgetBy) => {
+const getBy = async ({ field, value, path, args, esClient }: IGetArgs) => {
   const nested = ParticipantType?.extensions?.nestedFields?.includes(path);
   const body = getBody({ field, value, path, nested });
   const res = await esClient.search({
@@ -31,9 +31,20 @@ const getBy = async ({ field, value, path, args, esClient }: IgetBy) => {
   return hits.map((hit) => hit._source) || [];
 };
 
+const getCount = async ({ field, value, path, esClient }: IGetArgs) => {
+  const nested = ParticipantType?.extensions?.nestedFields?.includes(path);
+  const body = getBody({ field, value, path, nested });
+  const res = await esClient.count({
+    index: esParticipantIndex,
+    body,
+  });
+  return res?.body?.count || 0;
+};
+
 const ParticipantModel = {
   get,
   getBy,
+  getCount,
 };
 
 export default ParticipantModel;
