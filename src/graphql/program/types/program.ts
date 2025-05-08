@@ -16,28 +16,42 @@ import programsData from '../data';
 import extendedMapping from '../extendedMapping';
 import ProgramAggType from './programAgg';
 
+export const ContactType = new GraphQLObjectType({
+  name: 'ContactType',
+  fields: () => ({
+    name: { type: GraphQLString },
+    email: { type: GraphQLString },
+    institution: { type: GraphQLString },
+  }),
+});
+
+export const ManagerType = new GraphQLObjectType({
+  name: 'ManagerType',
+  fields: () => ({
+    name: { type: GraphQLString },
+    picture_url: { type: GraphQLString },
+    role_fr: { type: GraphQLString },
+    role_en: { type: GraphQLString },
+    institution: { type: GraphQLString },
+  }),
+});
+
 export const ProgramType = new GraphQLObjectType({
   name: 'Program',
   fields: () => ({
     program_id: { type: GraphQLString },
-    program_name_en: { type: GraphQLString },
-    program_name_fr: { type: GraphQLString },
+    name_en: { type: GraphQLString },
+    name_fr: { type: GraphQLString },
     description_en: { type: GraphQLString },
     description_fr: { type: GraphQLString },
     website: { type: GraphQLString },
     citation_statement: { type: GraphQLString },
-    contact_name: { type: GraphQLString },
-    contact_email: { type: GraphQLString },
-    contact_institution: { type: GraphQLString },
-    manager_name: { type: GraphQLString },
-    manager_picture: { type: GraphQLString },
-    manager_role: { type: GraphQLString },
-    manager_institution: { type: GraphQLString },
+
+    contacts: { type: new GraphQLList(ContactType) },
+    managers: { type: new GraphQLList(ManagerType) },
+    logo_url: { type: GraphQLString },
     funding_sources: { type: new GraphQLList(GraphQLString) },
     study_codes: { type: new GraphQLList(GraphQLString) },
-
-    //TODO: to add logoUrl
-    logoUrl: { type: GraphQLString },
 
     participants_count: {
       type: GraphQLInt,
