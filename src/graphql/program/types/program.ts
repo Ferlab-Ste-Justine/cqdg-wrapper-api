@@ -36,6 +36,15 @@ export const ManagerType = new GraphQLObjectType({
   }),
 });
 
+export const PartnerType = new GraphQLObjectType({
+  name: 'PartnerType',
+  fields: () => ({
+    name: { type: GraphQLString },
+    logo_url: { type: GraphQLString },
+    rank: { type: GraphQLString },
+  }),
+});
+
 export const ProgramType = new GraphQLObjectType({
   name: 'Program',
   fields: () => ({
@@ -46,13 +55,11 @@ export const ProgramType = new GraphQLObjectType({
     description_fr: { type: GraphQLString },
     website: { type: GraphQLString },
     citation_statement: { type: GraphQLString },
-
     contacts: { type: new GraphQLList(ContactType) },
     managers: { type: new GraphQLList(ManagerType) },
+    partners: { type: new GraphQLList(PartnerType) },
     logo_url: { type: GraphQLString },
-    funding_sources: { type: new GraphQLList(GraphQLString) },
     study_codes: { type: new GraphQLList(GraphQLString) },
-
     participants_count: {
       type: GraphQLInt,
       resolve: participantsCountResolver,

@@ -31,7 +31,18 @@ const programs = {
           institution: 'CHU Sainte-Justine',
         },
       ],
-      funding_sources: ['FRQ', 'Genome Quebec'],
+      partners: [
+        {
+          name: 'FRQS',
+          logo_url: '',
+          rank: '2',
+        },
+        {
+          name: 'Genome Quebec',
+          logo_url: '',
+          rank: '1',
+        },
+      ],
       study_codes: ['STUDY1'],
       logo_url: 'logo_url',
     },
@@ -65,7 +76,18 @@ const programs = {
           institution: 'CHU Sainte-Justine',
         },
       ],
-      funding_sources: ['FRQ', 'Genome Quebec'],
+      partners: [
+        {
+          name: 'FRQS',
+          logo_url: '',
+          rank: '2',
+        },
+        {
+          name: 'Genome Quebec',
+          logo_url: '',
+          rank: '1',
+        },
+      ],
       study_codes: ['STUDY1', 'STUDY3', 'T-DEE'],
       logo_url: 'logo_url',
     },
@@ -99,7 +121,18 @@ const programs = {
           institution: 'CHU Sainte-Justine',
         },
       ],
-      funding_sources: ['FRQ', 'Genome Quebec'],
+      partners: [
+        {
+          name: 'FRQS',
+          logo_url: '',
+          rank: '2',
+        },
+        {
+          name: 'Genome Quebec',
+          logo_url: '',
+          rank: '1',
+        },
+      ],
       study_codes: ['STUDY1', 'STUDY2', 'STUDY3', 'T-DEE'],
       logo_url: 'logo_url',
     },
@@ -133,7 +166,18 @@ const programs = {
           institution: 'CHU Sainte-Justine',
         },
       ],
-      funding_sources: ['FRQ', 'Genome Quebec'],
+      partners: [
+        {
+          name: 'FRQS',
+          logo_url: '',
+          rank: '2',
+        },
+        {
+          name: 'Genome Quebec',
+          logo_url: '',
+          rank: '1',
+        },
+      ],
       study_codes: ['STUDY1', 'STUDY3'],
       logo_url: 'logo_url',
     },
