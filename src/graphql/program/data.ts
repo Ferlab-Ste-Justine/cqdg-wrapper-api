@@ -25,7 +25,7 @@ const programs = {
       managers: [
         {
           name: 'Layla Omar Al-Shaikh',
-          picture_url: 'see mockup',
+          picture_url: '/members_pictures/laylaomaralshaikh.png',
           role_fr: 'gestionnaire',
           role_en: 'manager',
           institution: 'CHU Sainte-Justine',
@@ -34,17 +34,17 @@ const programs = {
       partners: [
         {
           name: 'FRQS',
-          logo_url: '',
+          logo_url: '/partners_logos/FRQS.svg',
           rank: '2',
         },
         {
           name: 'Genome Quebec',
-          logo_url: '',
+          logo_url: '/partners_logos/genome_qc.svg',
           rank: '1',
         },
       ],
       study_codes: ['STUDY1'],
-      logo_url: 'logo_url',
+      logo_url: '',
     },
     {
       program_id: 'RARE-QC2',
@@ -70,7 +70,7 @@ const programs = {
       managers: [
         {
           name: 'Layla Omar Al-Shaikh',
-          picture_url: 'see mockup',
+          picture_url: '/members_pictures/laylaomaralshaikh.png',
           role_fr: 'gestionnaire',
           role_en: 'manager',
           institution: 'CHU Sainte-Justine',
@@ -79,17 +79,17 @@ const programs = {
       partners: [
         {
           name: 'FRQS',
-          logo_url: '',
+          logo_url: '/partners_logos/FRQS.svg',
           rank: '2',
         },
         {
           name: 'Genome Quebec',
-          logo_url: '',
+          logo_url: '/partners_logos/genome_qc.svg',
           rank: '1',
         },
       ],
       study_codes: ['STUDY1', 'STUDY3', 'T-DEE'],
-      logo_url: 'logo_url',
+      logo_url: '/programs_logos/rare.svg',
     },
     {
       program_id: 'RARE-QC3',
@@ -115,7 +115,28 @@ const programs = {
       managers: [
         {
           name: 'Layla Omar Al-Shaikh',
-          picture_url: 'see mockup',
+          picture_url: '/members_pictures/laylaomaralshaikh.png',
+          role_fr: 'gestionnaire',
+          role_en: 'manager',
+          institution: 'CHU Sainte-Justine',
+        },
+        {
+          name: 'Esther Howard',
+          picture_url: '/members_pictures/estherhoward.png',
+          role_fr: 'gestionnaire',
+          role_en: 'manager',
+          institution: 'CHU Sainte-Justine',
+        },
+        {
+          name: 'James Bennett',
+          picture_url: '/members_pictures/jamesbennett.png',
+          role_fr: 'gestionnaire',
+          role_en: 'manager',
+          institution: 'CHU Sainte-Justine',
+        },
+        {
+          name: 'Ralph Edwards',
+          picture_url: '/members_pictures/ralphedwards.png',
           role_fr: 'gestionnaire',
           role_en: 'manager',
           institution: 'CHU Sainte-Justine',
@@ -124,17 +145,67 @@ const programs = {
       partners: [
         {
           name: 'FRQS',
-          logo_url: '',
+          logo_url: '/partners_logos/FRQS.svg',
           rank: '2',
         },
         {
           name: 'Genome Quebec',
-          logo_url: '',
+          logo_url: '/partners_logos/genome_qc.svg',
           rank: '1',
+        },
+        {
+          name: 'CHU Sainte-Justine',
+          logo_url: '/partners_logos/CHUSJ.svg',
+          rank: '3',
+        },
+        {
+          name: 'CQDG',
+          logo_url: '/partners_logos/CQDG.svg',
+          rank: '4',
+        },
+        {
+          name: 'FCI',
+          logo_url: '/partners_logos/FCI.svg',
+          rank: '5',
+        },
+        {
+          name: 'INESSS',
+          logo_url: '/partners_logos/INESSS.svg',
+          rank: '7',
+        },
+        {
+          name: 'MSSSQ',
+          logo_url: '/partners_logos/MSSSQ.svg',
+          rank: '8',
+        },
+        {
+          name: 'RQDM',
+          logo_url: '/partners_logos/RQDM.svg',
+          rank: '9',
+        },
+        {
+          name: 'Axelys',
+          logo_url: '/partners_logos/axelys.svg',
+          rank: '10',
+        },
+        {
+          name: 'Ferlab',
+          logo_url: '/partners_logos/ferlab.svg',
+          rank: '11',
+        },
+        {
+          name: 'Invivo',
+          logo_url: '/partners_logos/invivo.svg',
+          rank: '13',
+        },
+        {
+          name: 'SD4H',
+          logo_url: '/partners_logos/sd4h.png',
+          rank: '14',
         },
       ],
       study_codes: ['STUDY1', 'STUDY2', 'STUDY3', 'T-DEE'],
-      logo_url: 'logo_url',
+      logo_url: '/programs_logos/rare.svg',
     },
     {
       program_id: 'RARE-QC4',
@@ -160,7 +231,7 @@ const programs = {
       managers: [
         {
           name: 'Layla Omar Al-Shaikh',
-          picture_url: 'see mockup',
+          picture_url: '/members_pictures/laylaomaralshaikh.png',
           role_fr: 'gestionnaire',
           role_en: 'manager',
           institution: 'CHU Sainte-Justine',
@@ -169,17 +240,17 @@ const programs = {
       partners: [
         {
           name: 'FRQS',
-          logo_url: '',
+          logo_url: '/partners_logos/FRQS.svg',
           rank: '2',
         },
         {
           name: 'Genome Quebec',
-          logo_url: '',
+          logo_url: '/partners_logos/genome_qc.svg',
           rank: '1',
         },
       ],
       study_codes: ['STUDY1', 'STUDY3'],
-      logo_url: 'logo_url',
+      logo_url: '',
     },
   ],
 };
