@@ -4,7 +4,6 @@ import { GraphQLObjectType } from 'graphql';
 const FileAgg = new GraphQLObjectType({
   name: 'FileAgg',
   fields: {
-    biospecimen_reference: { type: AggregationsType },
     biospecimens__age_biospecimen_collection: { type: AggregationsType },
     biospecimens__biospecimen_id: { type: AggregationsType },
     biospecimens__biospecimen_tissue_source: { type: AggregationsType },
