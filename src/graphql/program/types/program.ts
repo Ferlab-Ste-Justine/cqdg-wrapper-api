@@ -10,7 +10,8 @@ import GraphQLJSON from '@ferlab/next/lib/common/types/jsonType';
 import { GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
 
 import { esProgramIndex } from '#src/config/env';
-import { participantsCountResolver } from '#src/graphql/program/resolver';
+import { participantsCountResolver, studiesResolver } from '#src/graphql/program/resolver';
+import { StudyType } from '#src/graphql/study/types/study';
 
 import programsData from '../data';
 import extendedMapping from '../extendedMapping';
@@ -60,6 +61,7 @@ export const ProgramType = new GraphQLObjectType({
     partners: { type: new GraphQLList(PartnerType) },
     logo_url: { type: GraphQLString },
     study_codes: { type: new GraphQLList(GraphQLString) },
+    studies: { type: new GraphQLList(StudyType), resolve: studiesResolver },
     participants_count: {
       type: GraphQLInt,
       resolve: participantsCountResolver,
