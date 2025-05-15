@@ -84,6 +84,7 @@ export const StudyType = new GraphQLObjectType({
     citation_statement: { type: GraphQLString },
     selection_criteria: { type: GraphQLString },
     expected_items: { type: new GraphQLList(GraphQLString) },
+    logo_url: { type: GraphQLString },
   }),
   extensions: {
     nestedFields: ['data_categories', 'data_types', 'datasets', 'experimental_strategies'],

@@ -20,7 +20,7 @@ import ProgramAggType from './programAgg';
 export const ContactType = new GraphQLObjectType({
   name: 'ContactType',
   fields: () => ({
-    name: { type: GraphQLString },
+    website: { type: GraphQLString },
     email: { type: GraphQLString },
     institution: { type: GraphQLString },
   }),
