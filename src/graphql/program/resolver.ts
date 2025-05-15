@@ -30,7 +30,11 @@ export const participantsCountResolver = async (parent, args, context) => {
 
 export const studiesResolver = async (parent, args, context) => {
   try {
-    const { study_codes } = parent;
+    const { study_codes, studies } = parent;
+
+    if (studies?.length) {
+      return studies;
+    }
 
     const results = await StudyModel.getBy({
       field: 'study_code',

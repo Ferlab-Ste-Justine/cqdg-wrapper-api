@@ -20,7 +20,7 @@ import ProgramAggType from './programAgg';
 export const ContactType = new GraphQLObjectType({
   name: 'ContactType',
   fields: () => ({
-    name: { type: GraphQLString },
+    website: { type: GraphQLString },
     email: { type: GraphQLString },
     institution: { type: GraphQLString },
   }),
@@ -100,7 +100,11 @@ const ProgramsType = new GraphQLObjectType({
       args: hitsArgsType,
       // resolve: (parent, args, context) => hitsResolver(parent, args, ProgramType, context.esClient, context.devMode),
       //TODO: To replace by row behind once data is available on els
-      resolve: () => programsData,
+      resolve: (_, args) => {
+        const program_id = args?.filters?.content?.[0]?.content?.value;
+        if (!program_id) return programsData;
+        return { total: 1, edges: programsData.edges.filter((p) => p.program_id === program_id) };
+      },
     },
     mapping: { type: GraphQLJSON },
     extended: {
