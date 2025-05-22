@@ -12,7 +12,7 @@ import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLList, GraphQLObjectTyp
 import { esStudyIndex } from '#src/config/env';
 import DataSetsType from '#src/graphql/file/types/dataSets';
 import programsData from '#src/graphql/program/data';
-import ProgramsType from '#src/graphql/program/types/program';
+import { ProgramsType } from '#src/graphql/program/types/program';
 
 import extendedMapping from '../extendedMapping';
 import DataCategoriesType from './dataCategories';

@@ -19,8 +19,10 @@ interface IGetArgs {
 }
 
 const getBy = async ({ field, value, path, args, esClient }: IGetArgs) => {
-  const nested = ParticipantType?.extensions?.nestedFields?.includes(path);
-  const body = getBody({ field, value, path, nested });
+  const isNested = Array.isArray(ParticipantType.extensions?.nestedFields)
+    ? ParticipantType.extensions.nestedFields.includes(path)
+    : false;
+  const body = getBody({ field, value, path, nested: isNested });
   const res = await esClient.search({
     index: esParticipantIndex,
     size: args.first,
@@ -32,8 +34,10 @@ const getBy = async ({ field, value, path, args, esClient }: IGetArgs) => {
 };
 
 const getCount = async ({ field, value, path, esClient }: IGetArgs) => {
-  const nested = ParticipantType?.extensions?.nestedFields?.includes(path);
-  const body = getBody({ field, value, path, nested });
+  const isNested = Array.isArray(ParticipantType.extensions?.nestedFields)
+    ? ParticipantType.extensions.nestedFields.includes(path)
+    : false;
+  const body = getBody({ field, value, path, nested: isNested });
   const res = await esClient.count({
     index: esParticipantIndex,
     body,

@@ -93,7 +93,7 @@ const ProgramsHitsType = new GraphQLObjectType({
   }),
 });
 
-const ProgramsType = new GraphQLObjectType({
+export const ProgramsType = new GraphQLObjectType({
   name: 'ProgramsType',
   fields: () => ({
     hits: {
