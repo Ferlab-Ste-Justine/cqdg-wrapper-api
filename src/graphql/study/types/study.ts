@@ -11,6 +11,8 @@ import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLList, GraphQLObjectTyp
 
 import { esStudyIndex } from '#src/config/env';
 import DataSetsType from '#src/graphql/file/types/dataSets';
+import programsData from '#src/graphql/program/data';
+import ProgramsType from '#src/graphql/program/types/program';
 
 import extendedMapping from '../extendedMapping';
 import DataCategoriesType from './dataCategories';
@@ -85,6 +87,11 @@ export const StudyType = new GraphQLObjectType({
     selection_criteria: { type: GraphQLString },
     expected_items: { type: new GraphQLList(GraphQLString) },
     logo_url: { type: GraphQLString },
+    programs: {
+      type: ProgramsType,
+      //TODO: To remove and let the default resolver handle it after the programs data is available in the studies index
+      resolve: () => programsData,
+    },
   }),
   extensions: {
     nestedFields: ['data_categories', 'data_types', 'datasets', 'experimental_strategies'],
