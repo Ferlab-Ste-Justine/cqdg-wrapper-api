@@ -1,5 +1,4 @@
-import { GraphQLObjectType, GraphQLString } from 'graphql';
-import { GraphQLList } from "graphql/index";
+import { GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
 
 const SequencingExperimentType = new GraphQLObjectType({
   name: 'SequencingExperimentType',
