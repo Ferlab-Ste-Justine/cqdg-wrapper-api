@@ -20,6 +20,7 @@ import ProgramAggType from './programAgg';
 export const ContactType = new GraphQLObjectType({
   name: 'ContactType',
   fields: () => ({
+    name: { type: GraphQLString }, //TODO: To remove `name` field after merge front feat/cqdg-1046
     website: { type: GraphQLString },
     email: { type: GraphQLString },
     institution: { type: GraphQLString },
@@ -92,7 +93,7 @@ const ProgramsHitsType = new GraphQLObjectType({
   }),
 });
 
-const ProgramsType = new GraphQLObjectType({
+export const ProgramsType = new GraphQLObjectType({
   name: 'ProgramsType',
   fields: () => ({
     hits: {
