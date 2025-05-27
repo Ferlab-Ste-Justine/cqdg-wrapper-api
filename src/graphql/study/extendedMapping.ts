@@ -848,6 +848,26 @@ const extendedMapping = [
     gqlId: 'cqdg::Study::extended::expected_items',
     primaryKey: false,
   },
+  {
+    field: 'programs.name_fr',
+    displayName: 'Program Name FR',
+    active: true,
+    isArray: false,
+    rangeStep: 1,
+    type: 'keyword',
+    gqlId: 'cqdg::Study::extended::programs__name_fr',
+    primaryKey: false,
+  },
+  {
+    field: 'programs.name_en',
+    displayName: 'Program Name EN',
+    active: true,
+    isArray: false,
+    rangeStep: 1,
+    type: 'keyword',
+    gqlId: 'cqdg::Study::extended::programs__name_en',
+    primaryKey: false,
+  },
 ];
 
 export default extendedMapping;
