@@ -1951,6 +1951,32 @@ const extendedMapping: I_ExtendedMappingSetFieldInput[] = [
     gqlId: 'cqdg::Participant::extended::vital_status',
     primaryKey: false,
   },
+  {
+    unit: null,
+    displayValues: {},
+    quickSearchEnabled: false,
+    field: 'study.programs.name_en',
+    displayName: 'Program Name EN',
+    active: false,
+    isArray: false,
+    rangeStep: 1,
+    type: 'keyword',
+    gqlId: 'cqdg::Participant::extended::study.programs.name_en',
+    primaryKey: false,
+  },
+  {
+    unit: null,
+    displayValues: {},
+    quickSearchEnabled: false,
+    field: 'study.programs.name_fr',
+    displayName: 'Program Name FR',
+    active: false,
+    isArray: false,
+    rangeStep: 1,
+    type: 'keyword',
+    gqlId: 'cqdg::Participant::extended::study.programs.name_fr',
+    primaryKey: false,
+  },
 ];
 
 export default extendedMapping;
