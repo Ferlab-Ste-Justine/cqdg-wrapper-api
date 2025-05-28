@@ -849,6 +849,9 @@ const extendedMapping = [
     primaryKey: false,
   },
   {
+    unit: null,
+    displayValues: {},
+    quickSearchEnabled: false,
     field: 'programs.name_fr',
     displayName: 'Program Name FR',
     active: true,
@@ -859,6 +862,9 @@ const extendedMapping = [
     primaryKey: false,
   },
   {
+    unit: null,
+    displayValues: {},
+    quickSearchEnabled: false,
     field: 'programs.name_en',
     displayName: 'Program Name EN',
     active: true,
