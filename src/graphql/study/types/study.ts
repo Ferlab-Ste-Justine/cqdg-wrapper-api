@@ -81,7 +81,14 @@ export const StudyType = new GraphQLObjectType({
     contact_institutions: { type: new GraphQLList(GraphQLString) },
     contact_emails: { type: new GraphQLList(GraphQLString) },
     telecom: { type: GraphQLString },
-    websites: { type: new GraphQLList(GraphQLString), resolve: (parent) => parent.website },
+    websites: {
+      type: new GraphQLList(GraphQLString),
+      resolve: (parent) => {
+        //TODO: Keep only website field when all studies are migrated
+        if (Array.isArray(parent.website)) return parent.website;
+        return [parent.website];
+      },
+    },
     funding_sources: { type: new GraphQLList(GraphQLString) },
     citation_statement: { type: GraphQLString },
     selection_criteria: { type: GraphQLString },
