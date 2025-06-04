@@ -8,6 +8,14 @@ export const ExperimentalStrategyType = new GraphQLObjectType({
   }),
 });
 
+export const CodeDisplayType = new GraphQLObjectType({
+  name: 'CodeDisplayType',
+  fields: () => ({
+    code: { type: GraphQLString },
+    display: { type: GraphQLString },
+  }),
+});
+
 const SequencingExperimentType = new GraphQLObjectType({
   name: 'SequencingExperimentType',
   fields: () => ({
@@ -35,6 +43,10 @@ const SequencingExperimentType = new GraphQLObjectType({
     type_of_sequencing: { type: GraphQLString },
     workflow_name: { type: GraphQLString },
     workflow_version: { type: GraphQLString },
+    source: { type: CodeDisplayType },
+    selection: { type: CodeDisplayType },
+    target_loci: { type: GraphQLString },
+    protocol: { type: GraphQLString },
   }),
 });
 
