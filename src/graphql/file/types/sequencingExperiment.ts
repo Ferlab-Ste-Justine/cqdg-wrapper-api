@@ -1,5 +1,13 @@
 import { GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
 
+export const ExperimentalStrategyType = new GraphQLObjectType({
+  name: 'ExperimentalStrategyType',
+  fields: () => ({
+    display: { type: GraphQLString },
+    code: { type: GraphQLString },
+  }),
+});
+
 const SequencingExperimentType = new GraphQLObjectType({
   name: 'SequencingExperimentType',
   fields: () => ({
@@ -9,6 +17,7 @@ const SequencingExperimentType = new GraphQLObjectType({
     bio_informatic_analysis: { type: GraphQLString },
     capture_kit: { type: GraphQLString },
     experimental_strategy: { type: GraphQLString },
+    experimental_strategy_1: { type: ExperimentalStrategyType },
     gcnv: { type: GraphQLString },
     genome_build: { type: GraphQLString },
     gsv: { type: GraphQLString },

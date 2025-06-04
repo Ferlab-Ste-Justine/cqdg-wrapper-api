@@ -11,6 +11,7 @@ import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLList, GraphQLObjectTyp
 
 import { esStudyIndex } from '#src/config/env';
 import DataSetsType from '#src/graphql/file/types/dataSets';
+import { ExperimentalStrategyType } from '#src/graphql/file/types/sequencingExperiment';
 import programsData from '#src/graphql/program/data';
 import { ProgramsType } from '#src/graphql/program/types/program';
 
@@ -66,6 +67,7 @@ export const StudyType = new GraphQLObjectType({
     data_types: { type: DataTypesType },
     datasets: { type: DataSetsType },
     experimental_strategies: { type: ExperimentalStrategiesType },
+    experimental_strategies_1: { type: new GraphQLList(ExperimentalStrategyType) },
     restricted: { type: GraphQLBoolean },
     study_designs: { type: new GraphQLList(GraphQLString) },
     data_collection_methods: { type: new GraphQLList(GraphQLString) },
