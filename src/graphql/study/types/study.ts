@@ -12,7 +12,6 @@ import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLList, GraphQLObjectTyp
 import { esStudyIndex } from '#src/config/env';
 import DataSetsType from '#src/graphql/file/types/dataSets';
 import { ExperimentalStrategyType } from '#src/graphql/file/types/sequencingExperiment';
-import programsData from '#src/graphql/program/data';
 import { ProgramsType } from '#src/graphql/program/types/program';
 
 import extendedMapping from '../extendedMapping';
@@ -98,8 +97,6 @@ export const StudyType = new GraphQLObjectType({
     logo_url: { type: GraphQLString },
     programs: {
       type: ProgramsType,
-      //TODO: To remove and let the default resolver handle it after the programs data is available in the studies index
-      resolve: () => programsData,
     },
   }),
   extensions: {

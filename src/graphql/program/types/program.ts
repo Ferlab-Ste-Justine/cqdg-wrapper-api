@@ -1,4 +1,4 @@
-import { aggsResolver, columnStateResolver, edgesResolver } from '@ferlab/next/lib/common/resolvers';
+import { aggsResolver, columnStateResolver, edgesResolver, hitsResolver } from '@ferlab/next/lib/common/resolvers';
 import {
   aggregationsArgsType,
   AggsStateType,
@@ -13,7 +13,6 @@ import { esProgramIndex } from '#src/config/env';
 import { participantsCountResolver, studiesResolver } from '#src/graphql/program/resolver';
 import { StudyType } from '#src/graphql/study/types/study';
 
-import programsData from '../data';
 import extendedMapping from '../extendedMapping';
 import ProgramAggType from './programAgg';
 
@@ -99,13 +98,7 @@ export const ProgramsType = new GraphQLObjectType({
     hits: {
       type: ProgramsHitsType,
       args: hitsArgsType,
-      // resolve: (parent, args, context) => hitsResolver(parent, args, ProgramType, context.esClient, context.devMode),
-      //TODO: To replace by row behind once data is available on els
-      resolve: (_, args) => {
-        const program_id = args?.filters?.content?.[0]?.content?.value;
-        if (!program_id) return programsData;
-        return { total: 1, edges: programsData.edges.filter((p) => p.program_id === program_id) };
-      },
+      resolve: (parent, args, context) => hitsResolver(parent, args, ProgramType, context.esClient, context.devMode),
     },
     mapping: { type: GraphQLJSON },
     extended: {
