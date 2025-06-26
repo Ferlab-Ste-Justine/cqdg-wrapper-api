@@ -60,6 +60,7 @@ const StudyAggType = new GraphQLObjectType({
     citation_statement: { type: AggregationsType },
     selection_criteria: { type: AggregationsType },
     expected_items: { type: AggregationsType },
+    programs__program_id: { type: AggregationsType },
     programs__name_fr: { type: AggregationsType },
     programs__name_en: { type: AggregationsType },
   },
