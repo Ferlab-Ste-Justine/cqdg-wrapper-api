@@ -142,6 +142,7 @@ const ParticipantAgg = new GraphQLObjectType({
     study_id: { type: AggregationsType },
     study__programs__name_en: { type: AggregationsType },
     study__programs__name_fr: { type: AggregationsType },
+    study__programs__program_id: { type: AggregationsType },
     submitter_participant_id: { type: AggregationsType },
     vital_status: { type: AggregationsType },
   },
