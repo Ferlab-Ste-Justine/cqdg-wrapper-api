@@ -78,6 +78,7 @@ export const ParticipantType = new GraphQLObjectType({
       'non_observed_phenotype_tagged',
       'observed_phenotype_tagged',
       'observed_phenotypes',
+      'study.programs',
     ],
     esIndex: esParticipantIndex,
   },

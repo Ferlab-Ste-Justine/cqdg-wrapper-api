@@ -5,6 +5,8 @@ const ProgramAggType = new GraphQLObjectType({
   name: 'ProgramAggType',
   fields: {
     program_id: { type: AggregationsType },
+    name_en: { type: AggregationsType },
+    name_fr: { type: AggregationsType },
   },
 });
 
