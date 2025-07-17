@@ -95,12 +95,10 @@ export const StudyType = new GraphQLObjectType({
     selection_criteria: { type: GraphQLString },
     expected_items: { type: new GraphQLList(GraphQLString) },
     logo_url: { type: GraphQLString },
-    programs: {
-      type: ProgramsType,
-    },
+    programs: { type: ProgramsType },
   }),
   extensions: {
-    nestedFields: ['data_categories', 'data_types', 'datasets', 'experimental_strategies'],
+    nestedFields: ['data_categories', 'data_types', 'datasets', 'experimental_strategies', 'programs'],
     esIndex: esStudyIndex,
   },
 });

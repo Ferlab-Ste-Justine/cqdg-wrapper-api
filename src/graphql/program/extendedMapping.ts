@@ -12,6 +12,32 @@ const extendedMapping = [
     gqlId: 'cqdg::Program::extended::program_id',
     primaryKey: false,
   },
+  {
+    unit: null,
+    displayValues: {},
+    quickSearchEnabled: false,
+    field: 'name_en',
+    displayName: 'Program Name EN',
+    active: false,
+    isArray: false,
+    rangeStep: 1,
+    type: 'keyword',
+    gqlId: 'cqdg::Program::extended::name_en',
+    primaryKey: false,
+  },
+  {
+    unit: null,
+    displayValues: {},
+    quickSearchEnabled: false,
+    field: 'name_fr',
+    displayName: 'Program Name FR',
+    active: false,
+    isArray: false,
+    rangeStep: 1,
+    type: 'keyword',
+    gqlId: 'cqdg::Program::extended::name_fr',
+    primaryKey: false,
+  },
 ];
 
 export default extendedMapping;
