@@ -172,3 +172,20 @@ export const fetchFileFormatStats = async (experimental_strategy = 'WGS'): Promi
     return null;
   }
 };
+
+export const fetchParticipantsPerStudies = async () => {
+  try {
+    const { body } = await client.search({
+      index: esStudyIndex,
+      body: {
+        size: 500,
+        _source: ['participant_count', 'study_code'],
+      },
+    });
+
+    return body.hits.hits.map((hit) => hit._source);
+  } catch (error) {
+    console.log('[fetchParticipantsPerStudies] error: ', error);
+    return null;
+  }
+};
