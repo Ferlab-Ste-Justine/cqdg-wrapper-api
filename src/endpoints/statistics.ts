@@ -3,6 +3,7 @@ import {
   fetchFileFormatStats,
   fetchFileSizeStats,
   fetchFileStats,
+  fetchParticipantsPerStudies,
   fetchParticipantStats,
   fetchStudyStats,
   fetchVariantStats,
@@ -17,19 +18,22 @@ export type Statistics = {
   variants: number;
   genomes: number;
   exomes: number;
+  participantsPerStudies: { study_code: string; participant_count: number }[];
 };
 
 export const getStatistics = async (): Promise<Statistics> => {
-  const [files, studies, participants, fileSize, samples, variants, genomes, exomes] = await Promise.all([
-    fetchFileStats(),
-    fetchStudyStats(),
-    fetchParticipantStats(),
-    fetchFileSizeStats(),
-    fetchBiospecimenStats(),
-    fetchVariantStats(),
-    fetchFileFormatStats('WGS'),
-    fetchFileFormatStats('WXS'),
-  ]);
+  const [files, studies, participants, fileSize, samples, variants, genomes, exomes, participantsPerStudies] =
+    await Promise.all([
+      fetchFileStats(),
+      fetchStudyStats(),
+      fetchParticipantStats(),
+      fetchFileSizeStats(),
+      fetchBiospecimenStats(),
+      fetchVariantStats(),
+      fetchFileFormatStats('WGS'),
+      fetchFileFormatStats('WXS'),
+      fetchParticipantsPerStudies(),
+    ]);
 
   return {
     files,
@@ -40,5 +44,6 @@ export const getStatistics = async (): Promise<Statistics> => {
     variants,
     genomes,
     exomes,
+    participantsPerStudies,
   } as Statistics;
 };
