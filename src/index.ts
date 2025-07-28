@@ -14,6 +14,7 @@ import buildApp from './app';
 import { ALLOW_CUSTOM_MAX_DOWNLOAD_ROWS, devMode, isDev, MAX_DOWNLOAD_ROWS, port } from './config/env';
 import keycloakConfig from './config/keycloak';
 import schema from './graphql/schema';
+import kcProtectGraphQLMiddleware from './middleware/kcProtectGraphQLMiddleware';
 import esClient from './services/elasticsearch/client';
 
 const startApp = async () => {
@@ -42,14 +43,14 @@ const startApp = async () => {
     });
     await server.start();
     /** disable protect to enable graphql playground */
-    if (!isDev) app.use(keycloak.protect());
+    if (!isDev) app.use(kcProtectGraphQLMiddleware(keycloak));
     app.use(
       '/graphql',
       cors(),
       express.json({ limit: '50mb' }),
       expressMiddleware(server, { context: ({ req }) => resolveContext(req) })
     );
-    app.use('/download', downloadRouter(resolveContext));
+    app.use('/download', keycloak.protect(), downloadRouter(resolveContext));
     httpServer.listen({ port });
     console.info(`[startApp] 🚀 Server ready on ${port}`);
   } catch (err) {
