@@ -9,10 +9,16 @@ import {
   esVariantIndex,
 } from '#src/config/env';
 import sampleExtendedMapping from '#src/graphql/biospecimen/extendedMapping';
+import { BiospecimenType } from '#src/graphql/biospecimen/types/biospecimen';
 import fileExtendedMapping from '#src/graphql/file/extendedMapping';
+import { FileType } from '#src/graphql/file/types/file';
 import geneExtendedMapping from '#src/graphql/gene/extendedMapping';
+import { GeneType } from '#src/graphql/gene/types/gene';
 import participantExtendedMapping from '#src/graphql/participant/extendedMapping';
+import { ParticipantType } from '#src/graphql/participant/types/participant';
 import studyExtendedMapping from '#src/graphql/study/extendedMapping';
+import { StudyType } from '#src/graphql/study/types/study';
+import { VariantType } from '#src/graphql/variant/types/variant';
 
 export const getExtendedMappingByIndex = (graphqlIndex = '') => {
   switch (graphqlIndex) {
@@ -51,5 +57,22 @@ export const getESIndexByIndex = (graphqlIndex = ''): string => {
       return esGeneIndex;
     case 'Study':
       return esStudyIndex;
+  }
+};
+
+export const getGraphqlTypeByIndex = (graphqlIndex = '') => {
+  switch (graphqlIndex) {
+    case 'Participant':
+      return ParticipantType;
+    case 'Biospecimen':
+      return BiospecimenType;
+    case 'File':
+      return FileType;
+    case 'Variant':
+      return VariantType;
+    case 'Gene':
+      return GeneType;
+    case 'Study':
+      return StudyType;
   }
 };
