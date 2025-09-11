@@ -7,7 +7,7 @@ import {
   MatchBoxStateType,
 } from '@ferlab/next/lib/common/types';
 import GraphQLJSON from '@ferlab/next/lib/common/types/jsonType';
-import { GraphQLBoolean, GraphQLEnumType, GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
+import { GraphQLBoolean, GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
 
 import { esParticipantIndex } from '#src/config/env';
 import { BiospecimensType } from '#src/graphql/biospecimen/types/biospecimen';
@@ -21,21 +21,13 @@ import IcdsType from './icds';
 import ParticipantAgg from './participantAgg';
 import PhenotypesType from './phenotypes';
 
-const SexType = new GraphQLEnumType({
-  name: 'Sex',
-  values: {
-    female: { value: 'female' },
-    male: { value: 'male' },
-  },
-});
-
 export const ParticipantType = new GraphQLObjectType({
   name: 'Participant',
   fields: () => ({
     id: { type: GraphQLString },
     participant_id: { type: GraphQLString },
     participant_2_id: { type: GraphQLString },
-    sex: { type: SexType },
+    sex: { type: GraphQLString },
     age_at_recruitment: { type: GraphQLString },
     age_of_death: { type: GraphQLString },
     cause_of_death: { type: GraphQLString },
