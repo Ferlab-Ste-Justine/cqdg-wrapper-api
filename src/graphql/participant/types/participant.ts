@@ -21,6 +21,24 @@ import IcdsType from './icds';
 import ParticipantAgg from './participantAgg';
 import PhenotypesType from './phenotypes';
 
+const CodeDisplayMethodType = new GraphQLObjectType({
+  name: 'CodeDisplayMethodType',
+  fields: () => ({
+    code: { type: GraphQLString },
+    display: { type: GraphQLString },
+    another_category: { type: GraphQLString },
+    collect_method: {
+      type: new GraphQLObjectType({
+        name: 'CodeDisplayCollectMethodType',
+        fields: () => ({
+          code: { type: GraphQLString },
+          display: { type: GraphQLString },
+        }),
+      }),
+    },
+  }),
+});
+
 export const ParticipantType = new GraphQLObjectType({
   name: 'Participant',
   fields: () => ({
@@ -28,6 +46,9 @@ export const ParticipantType = new GraphQLObjectType({
     participant_id: { type: GraphQLString },
     participant_2_id: { type: GraphQLString },
     sex: { type: GraphQLString },
+    sex_at_birth: { type: CodeDisplayMethodType },
+    gender: { type: CodeDisplayMethodType },
+    race: { type: CodeDisplayMethodType },
     age_at_recruitment: { type: GraphQLString },
     age_of_death: { type: GraphQLString },
     cause_of_death: { type: GraphQLString },
