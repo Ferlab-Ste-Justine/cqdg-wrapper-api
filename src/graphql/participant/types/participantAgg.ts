@@ -36,7 +36,6 @@ const ParticipantAgg = new GraphQLObjectType({
     family_relationships__submitter_family_id: { type: AggregationsType },
     family_relationships__submitter_participant_id: { type: AggregationsType },
     family_type: { type: AggregationsType },
-    files__biospecimen_reference: { type: AggregationsType },
     files__biospecimens__age_biospecimen_collection: { type: AggregationsType },
     files__biospecimens__biospecimen_2_id: { type: AggregationsType },
     files__biospecimens__biospecimen_id: { type: AggregationsType },
