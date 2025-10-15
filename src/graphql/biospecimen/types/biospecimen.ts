@@ -17,6 +17,15 @@ import { StudyType } from '#src/graphql/study/types/study';
 import extendedMapping from '../extendedMapping';
 import BiospecimenAgg from './biospecimenAgg';
 
+const CodeDisplayTextType = new GraphQLObjectType({
+  name: 'CodeDisplayTextType',
+  fields: () => ({
+    code: { type: GraphQLString },
+    display: { type: GraphQLString },
+    text: { type: GraphQLString },
+  }),
+});
+
 export const BiospecimenType = new GraphQLObjectType({
   name: 'Biospecimen',
   fields: () => ({
@@ -25,6 +34,10 @@ export const BiospecimenType = new GraphQLObjectType({
     sample_id: { type: GraphQLString },
     sample_2_id: { type: GraphQLString },
     biospecimen_tissue_source: { type: GraphQLString },
+    tumor_normal_designation: { type: GraphQLString },
+    cancer_biospecimen_type: { type: GraphQLString },
+    tumor_histological_type: { type: CodeDisplayTextType },
+    cancer_anatomic_location: { type: CodeDisplayTextType },
     age_biospecimen_collection: { type: GraphQLString },
     sample_type: { type: GraphQLString },
     security: { type: GraphQLString },
