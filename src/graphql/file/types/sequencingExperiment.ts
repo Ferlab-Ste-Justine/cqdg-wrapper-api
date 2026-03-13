@@ -32,6 +32,7 @@ const SequencingExperimentType = new GraphQLObjectType({
     labAliquotID: { type: GraphQLString },
     ldm_sample_id: { type: GraphQLString },
     owner: { type: GraphQLString },
+    pipelines: { type: new GraphQLList(GraphQLString) },
     platform: { type: GraphQLString },
     read_length: { type: GraphQLString },
     run_alias: { type: GraphQLString },
