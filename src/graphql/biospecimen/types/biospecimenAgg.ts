@@ -29,6 +29,7 @@ const BiospecimenAgg = new GraphQLObjectType({
     files__sequencing_experiment__analysis_id: { type: AggregationsType },
     files__sequencing_experiment__bio_informatic_analysis: { type: AggregationsType },
     files__sequencing_experiment__capture_kit: { type: AggregationsType },
+    files__sequencing_experiment__target_capture_kit: { type: AggregationsType },
     files__sequencing_experiment__experimental_strategy: { type: AggregationsType },
     files__sequencing_experiment__gcnv: { type: AggregationsType },
     files__sequencing_experiment__genome_build: { type: AggregationsType },
