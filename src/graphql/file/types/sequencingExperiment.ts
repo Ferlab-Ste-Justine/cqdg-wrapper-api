@@ -24,6 +24,7 @@ const SequencingExperimentType = new GraphQLObjectType({
     analysis_id: { type: GraphQLString },
     bio_informatic_analysis: { type: GraphQLString },
     capture_kit: { type: GraphQLString },
+    target_capture_kit: { type: GraphQLString },
     experimental_strategy: { type: GraphQLString },
     experimental_strategy_1: { type: ExperimentalStrategyType },
     gcnv: { type: GraphQLString },
