@@ -269,7 +269,7 @@ const extendedMapping = [
     quickSearchEnabled: false,
     unit: null,
     displayValues: {},
-    rangeStep: 0.01,
+    rangeStep: 1,
     gqlId: 'cqdg::Biospecimen::extended::files.file_md5sum',
   },
   {
