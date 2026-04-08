@@ -57,6 +57,7 @@ const ParticipantAgg = new GraphQLObjectType({
     files__file_id: { type: AggregationsType },
     files__file_name: { type: AggregationsType },
     files__file_size: { type: AggregationsType },
+    files__file_md5sum: { type: AggregationsType },
     files__relates_to: { type: AggregationsType },
     files__release_id: { type: AggregationsType },
     files__security: { type: AggregationsType },

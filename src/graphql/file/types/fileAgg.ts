@@ -97,6 +97,7 @@ const FileAgg = new GraphQLObjectType({
     file_id: { type: AggregationsType },
     file_name: { type: AggregationsType },
     file_size: { type: NumericAggregationsType },
+    file_md5sum: { type: AggregationsType },
     participants__age_at_recruitment: { type: AggregationsType },
     participants__age_of_death: { type: AggregationsType },
     participants__biospecimens__age_biospecimen_collection: { type: AggregationsType },

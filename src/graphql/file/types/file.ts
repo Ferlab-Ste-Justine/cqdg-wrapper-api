@@ -19,7 +19,7 @@ import filesResolver, { hitsResolverNested } from '../resolver';
 import FileAgg from './fileAgg';
 import SequencingExperimentType from './sequencingExperiment';
 
-export const FileType = new GraphQLObjectType({
+export const FileType: GraphQLObjectType = new GraphQLObjectType({
   name: 'File',
   fields: () => ({
     id: { type: GraphQLString },
@@ -34,6 +34,7 @@ export const FileType = new GraphQLObjectType({
     file_hash: { type: GraphQLString },
     file_name: { type: GraphQLString },
     file_size: { type: GraphQLFloat },
+    file_md5sum: { type: GraphQLString },
     relates_to: { type: GraphQLString },
     security: { type: GraphQLString },
     study_code: { type: GraphQLString },
