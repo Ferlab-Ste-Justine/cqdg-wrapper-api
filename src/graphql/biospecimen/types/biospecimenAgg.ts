@@ -24,7 +24,6 @@ const BiospecimenAgg = new GraphQLObjectType({
     files__file_id: { type: AggregationsType },
     files__file_name: { type: AggregationsType },
     files__file_size: { type: NumericAggregationsType },
-    files__file_md5sum: { type: AggregationsType },
     files__relates_to: { type: AggregationsType },
     files__sequencing_experiment__alir: { type: AggregationsType },
     files__sequencing_experiment__analysis_id: { type: AggregationsType },
