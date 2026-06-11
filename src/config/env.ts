@@ -34,7 +34,7 @@ export const indexNameVariantFeatureSuggestion = process.env.VARIANTS_SUGGESTION
 export const usersApiURL = process.env.USERS_API_URL || 'https://users.qa.juno.cqdg.ferlab.bio';
 export const maxSetContentSize: number = Number.parseInt(process.env.MAX_SET_CONTENT_SIZE) || 10000;
 
-export const fileIdKey = process.env.FILE_ID_KEY || 'file_id';
+export const fileIdKey = process.env.FILE_ID_KEY || 'stable_file_id';
 export const studyIdKey = process.env.STUDY_ID_KEY || 'study_id';
 export const participantIdKey = process.env.PARTICIPANT_ID_KEY || 'participant_id';
 export const biospecimenIdKey = process.env.BIOSPECIMEN_ID_KEY || 'sample_id';
