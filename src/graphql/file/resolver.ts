@@ -28,7 +28,7 @@ const filesResolver = async (parent, args, type, context) => {
   try {
     const { esClient, auth, devMode } = context;
     const filesHits = await hitsResolver(parent, args, type, esClient, devMode);
-    const file_ids: string[] = filesHits?.edges.map((file) => file.file_id);
+    const file_ids: string[] = filesHits?.edges.map((file) => file.stable_file_id);
 
     const res = await fetch(`${ferloadURL}/permissions/by-list`, {
       method: 'POST',
@@ -47,7 +47,7 @@ const filesResolver = async (parent, args, type, context) => {
 
     const filesWithUserAccess = filesHits?.edges.map((file) => {
       let user_authorized = false;
-      if (filesAuthorized.includes(file.file_id)) {
+      if (filesAuthorized.includes(file.stable_file_id)) {
         user_authorized = true;
       }
       return { ...file, user_authorized };

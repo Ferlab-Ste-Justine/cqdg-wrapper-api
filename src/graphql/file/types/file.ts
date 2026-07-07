@@ -34,6 +34,7 @@ export const FileType: GraphQLObjectType = new GraphQLObjectType({
     file_hash: { type: GraphQLString },
     file_name: { type: GraphQLString },
     file_size: { type: GraphQLFloat },
+    stable_file_id: { type: GraphQLString },
     relates_to: { type: GraphQLString },
     security: { type: GraphQLString },
     study_code: { type: GraphQLString },
