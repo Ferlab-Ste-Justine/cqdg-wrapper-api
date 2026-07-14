@@ -10,14 +10,22 @@ import { participantBiospecimenKey, participantFileKey, participantKey } from '.
 import { maxSetContentSize, participantIdKey, usersApiURL } from '../config/env';
 import runQuery from '../graphql/runQuery';
 
-const getPathToParticipantId = (type: string) => {
+const getPathToParticipantId = (type: string, idField?: string) => {
+  let path: string;
   if (type === 'biospecimen') {
-    return participantBiospecimenKey;
+    path = participantBiospecimenKey;
   } else if (type === 'file') {
-    return participantFileKey;
+    path = participantFileKey;
   } else {
-    return participantKey;
+    path = participantKey;
   }
+  if (!idField) {
+    return path;
+  }
+  // Point the path at the field the set ids were collected from, keeping the nested prefix
+  // (e.g. new file sets hold `stable_file_id` values while legacy ones hold `file_id` values)
+  const segments = path.split('.');
+  return [...segments.slice(0, -1), idField].join('.');
 };
 
 export const getPhenotypesNodes = async (
