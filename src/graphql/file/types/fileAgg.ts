@@ -265,6 +265,7 @@ const FileAgg = new GraphQLObjectType({
     sequencing_experiment__capture_kit: { type: AggregationsType },
     sequencing_experiment__target_capture_kit: { type: AggregationsType },
     sequencing_experiment__experimental_strategy: { type: AggregationsType },
+    sequencing_experiment__profiling_resolution: { type: AggregationsType },
     sequencing_experiment__gcnv: { type: AggregationsType },
     sequencing_experiment__genome_build: { type: AggregationsType },
     sequencing_experiment__gsv: { type: AggregationsType },
