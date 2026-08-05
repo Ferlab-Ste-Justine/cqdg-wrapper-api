@@ -1,4 +1,4 @@
-import { GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
+import { GraphQLBoolean, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
 
 export const ExperimentalStrategyType = new GraphQLObjectType({
   name: 'ExperimentalStrategyType',
@@ -25,8 +25,9 @@ const SequencingExperimentType = new GraphQLObjectType({
     bio_informatic_analysis: { type: GraphQLString },
     capture_kit: { type: GraphQLString },
     target_capture_kit: { type: GraphQLString },
-    experimental_strategy: { type: GraphQLString },
-    experimental_strategy_1: { type: ExperimentalStrategyType },
+    experimental_strategy: { type: new GraphQLList(GraphQLString) },
+    experimental_strategy_1: { type: new GraphQLList(ExperimentalStrategyType) },
+    profiling_resolution: { type: new GraphQLList(GraphQLString) },
     gcnv: { type: GraphQLString },
     genome_build: { type: GraphQLString },
     gsv: { type: GraphQLString },
@@ -34,7 +35,10 @@ const SequencingExperimentType = new GraphQLObjectType({
     ldm_sample_id: { type: GraphQLString },
     owner: { type: GraphQLString },
     pipelines: { type: new GraphQLList(GraphQLString) },
-    platform: { type: GraphQLString },
+    platform: { type: new GraphQLList(GraphQLString) },
+    instrument_model: { type: new GraphQLList(GraphQLString) },
+    pore_type: { type: GraphQLString },
+    is_imputed: { type: GraphQLBoolean },
     read_length: { type: GraphQLString },
     run_alias: { type: GraphQLString },
     run_date: { type: GraphQLString },
