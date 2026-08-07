@@ -158,7 +158,7 @@ export const fetchFileFormatStats = async (experimental_strategy = 'WGS'): Promi
           bool: {
             must: [
               { match: { file_format: 'CRAM' } },
-              { match: { 'sequencing_experiment.experimental_strategy': experimental_strategy } },
+              { match: { 'sequencing_experiment.experimental_strategies': experimental_strategy } },
             ],
           },
         },
