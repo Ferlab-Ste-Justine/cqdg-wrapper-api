@@ -9,6 +9,7 @@ export const DataTypeType = new GraphQLObjectType({
     score: { type: GraphQLFloat },
     data_type: { type: GraphQLString },
     participant_count: { type: GraphQLFloat },
+    file_count: { type: GraphQLFloat },
   }),
 });
 
