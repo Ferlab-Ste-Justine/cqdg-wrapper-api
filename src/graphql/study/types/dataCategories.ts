@@ -9,6 +9,7 @@ export const DataCategoryType = new GraphQLObjectType({
     score: { type: GraphQLFloat },
     data_category: { type: GraphQLString },
     participant_count: { type: GraphQLFloat },
+    file_count: { type: GraphQLFloat },
   }),
 });
 
