@@ -1,17 +1,33 @@
-import { createSet, deleteSet, getSets, SubActionTypes, updateSetContent, updateSetTag } from '@ferlab/next/lib/sets';
-import { Set, UpdateSetContentBody, UpdateSetTagBody } from '@ferlab/next/lib/sets/types';
+import type { Set, UpdateSetContentBody, UpdateSetTagBody } from '@ferlab/next/lib/sets/types';
 import { jest } from '@jest/globals';
 import { Express } from 'express';
 import Keycloak from 'keycloak-connect';
 import request from 'supertest';
 
-import buildApp from './app';
 import { keycloakClient, keycloakRealm, keycloakURL } from './config/env';
-import { getStatistics, Statistics } from './endpoints/statistics';
+import type { Statistics } from './endpoints/statistics';
 import { getToken, publicKey } from './utils/authTestUtils';
 
-jest.mock('@ferlab/next/lib/sets/index');
-jest.mock('./endpoints/statistics');
+// ESM: jest.mock() is not hoisted above static imports, so mocked modules
+// must be registered with unstable_mockModule and imported dynamically.
+jest.unstable_mockModule('@ferlab/next/lib/sets', () => ({
+  SubActionTypes: { RENAME_TAG: 'RENAME_TAG', ADD_IDS: 'ADD_IDS', REMOVE_IDS: 'REMOVE_IDS' },
+  getUserSet: jest.fn(),
+  getSets: jest.fn(),
+  createSet: jest.fn(),
+  updateSetTag: jest.fn(),
+  updateSetContent: jest.fn(),
+  deleteSet: jest.fn(),
+}));
+jest.unstable_mockModule('./endpoints/statistics', () => ({
+  getStatistics: jest.fn(),
+}));
+
+const { createSet, deleteSet, getSets, SubActionTypes, updateSetContent, updateSetTag } = await import(
+  '@ferlab/next/lib/sets'
+);
+const { getStatistics } = await import('./endpoints/statistics');
+const { default: buildApp } = await import('./app');
 
 //todo: fix tests
 describe('Express app', () => {
@@ -79,6 +95,7 @@ describe('Express app', () => {
         variants: 2333,
         exomes: 599,
         genomes: 0,
+        participantsPerStudies: [{ study_code: 'STUDY1', participant_count: 42 }],
       };
       (getStatistics as jest.Mock).mockImplementation(() => expectedStats);
       const token = getToken();
