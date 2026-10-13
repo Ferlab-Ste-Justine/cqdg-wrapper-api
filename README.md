@@ -30,7 +30,9 @@ Arranger server is an application that wraps Elasticsearch and provides a GraphQ
 
 ### Test
 
-* Execute: `npm run test`
+* Use Node 18 (see `.nvmrc`), e.g. `nvm use`. Node 22+ fails to load `src/app.ts` (`import ... assert { type: 'json' }` is no longer supported).
+* Execute: `npm run test` (or `npm run test:watch`)
+* Tests run Jest in ESM mode, so the npm scripts set `NODE_OPTIONS=--experimental-vm-modules` (see `jest.config.ts`). Run Jest through these scripts rather than calling `jest` directly.
 
 ### Development Setup with Docker
 
