@@ -1,3 +1,17 @@
+/**
+ * HTTP-level tests for the Express app built in app.ts.
+ *
+ * Each test sends a real HTTP request to the app with supertest, but:
+ * - business logic (sets, statistics) is replaced by Jest mocks, so no
+ *   Elasticsearch or users-api is needed;
+ * - Keycloak validates tokens offline with a local public key, and tokens are
+ *   signed by getToken() with the matching private key (see authTestUtils.ts).
+ *
+ * Tests therefore check routing, authentication/authorization and how each
+ * route calls its underlying function, not the business logic itself.
+ *
+ * Run with Node 18 (.nvmrc): `npm test`.
+ */
 import type { Set, UpdateSetContentBody, UpdateSetTagBody } from '@ferlab/next/lib/sets/types';
 import { jest } from '@jest/globals';
 import { Express } from 'express';
@@ -8,8 +22,11 @@ import { keycloakClient, keycloakRealm, keycloakURL } from './config/env';
 import type { Statistics } from './endpoints/statistics';
 import { getToken, publicKey } from './utils/authTestUtils';
 
-// ESM: jest.mock() is not hoisted above static imports, so mocked modules
-// must be registered with unstable_mockModule and imported dynamically.
+// This project uses ES modules. Unlike CommonJS, Jest cannot move jest.mock()
+// calls above static `import` statements, so modules imported statically would
+// load the real implementations. Instead, register mocks with
+// jest.unstable_mockModule() first, then load the mocked modules (and app.ts,
+// which depends on them) with dynamic `await import()` below.
 jest.unstable_mockModule('@ferlab/next/lib/sets', () => ({
   SubActionTypes: { RENAME_TAG: 'RENAME_TAG', ADD_IDS: 'ADD_IDS', REMOVE_IDS: 'REMOVE_IDS' },
   getUserSet: jest.fn(),
@@ -23,6 +40,8 @@ jest.unstable_mockModule('./endpoints/statistics', () => ({
   getStatistics: jest.fn(),
 }));
 
+// These imports resolve to the mocks above. app.ts must be imported after the
+// mocks are registered so that its own imports also receive the mocks.
 const { createSet, deleteSet, getSets, SubActionTypes, updateSetContent, updateSetTag } = await import(
   '@ferlab/next/lib/sets'
 );
@@ -34,6 +53,9 @@ describe('Express app', () => {
   let app: Express;
   let keycloakFakeConfig;
 
+  // Build a fresh app before every test with a Keycloak instance configured in
+  // bearer-only mode: it never contacts a Keycloak server, it only verifies the
+  // JWT signature with 'realm-public-key' and reads roles from the token.
   beforeEach(() => {
     const publicKeyToVerify = publicKey;
     keycloakFakeConfig = {
@@ -58,6 +80,8 @@ describe('Express app', () => {
       .expect('Content-Type', /json/);
   });
 
+  // Admin-only route (keycloak.protect('realm:ADMIN')): checks the three cases
+  // no token, token without the ADMIN realm role, and token with it.
   describe('POST /cache-clear', () => {
     it('should return 403 if no Authorization header', async () => await request(app).post('/cache-clear').expect(403));
 
@@ -80,7 +104,10 @@ describe('Express app', () => {
     });
   });
 
+  // getStatistics is mocked: the test checks that the route returns exactly what
+  // getStatistics returns, and calls it once.
   describe('GET /statistics', () => {
+    // Clear the mock's implementation and recorded calls between tests.
     beforeEach(() => {
       (getStatistics as jest.Mock).mockReset();
     });
@@ -123,6 +150,11 @@ describe('Express app', () => {
     // });
   });
 
+  // /sets routes (src/endpoints/sets) delegate to @ferlab/next set functions,
+  // which are mocked. Each group checks that a request without a token is
+  // rejected and that a valid request returns what the set function returns.
+  // Note: the "403 if no Authorization header" tests currently fail because
+  // /sets is mounted without keycloak.protect() in app.ts.
   describe('GET /sets', () => {
     beforeEach(() => {
       (getSets as jest.Mock).mockReset();
@@ -171,6 +203,8 @@ describe('Express app', () => {
   });
 
   describe('POST /sets', () => {
+    // Set creation payload: save the participants matching this sqon (query)
+    // as a set tagged "Nevus".
     const requestBody = {
       projectId: 'cqdg',
       type: 'participant',
@@ -239,6 +273,8 @@ describe('Express app', () => {
     // });
   });
 
+  // The route picks updateSetTag or updateSetContent based on body.subAction,
+  // so there is one test per sub-action.
   describe('PUT /sets/:setId', () => {
     const updateSetTagBody: UpdateSetTagBody = {
       sourceType: 'SAVE_SET',
@@ -294,6 +330,8 @@ describe('Express app', () => {
         .set({ Authorization: `Bearer ${token}` })
         .expect(checkRes)
         .expect(200);
+      // mock.calls[0] holds the arguments of the first call:
+      // (body, Authorization header, user id from the token "sub", setId from the URL).
       expect((updateSetTag as jest.Mock).mock.calls.length).toEqual(1);
       expect((updateSetTag as jest.Mock).mock.calls[0][0]).toEqual(updateSetTagBody);
       expect((updateSetTag as jest.Mock).mock.calls[0][1]).toEqual(`Bearer ${token}`);
