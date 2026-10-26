@@ -9,7 +9,7 @@ RUN npm run build
 FROM node:24.22.1-alpine AS prod-image
 WORKDIR /code
 COPY --from=build-image ./code/dist ./dist
-COPY package* ./
+COPY package* extensionless-resolve.mjs ./
 RUN npm install --production
 
 CMD [ "npm", "run", "start" ]
