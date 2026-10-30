@@ -10,6 +10,7 @@ FROM node:24.22.1-alpine AS prod-image
 WORKDIR /code
 COPY --from=build-image ./code/dist ./dist
 COPY package* extensionless-resolve.mjs ./
+COPY stubs ./stubs
 RUN npm install --production
 
 CMD [ "npm", "run", "start" ]
