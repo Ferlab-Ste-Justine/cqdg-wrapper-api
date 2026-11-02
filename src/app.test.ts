@@ -10,7 +10,7 @@
  * Tests therefore check routing, authentication/authorization and how each
  * route calls its underlying function, not the business logic itself.
  *
- * Run with Node 18 (.nvmrc): `npm test`.
+ * Run with Node 24 (.nvmrc): `npm test`.
  */
 import type { Set, UpdateSetContentBody, UpdateSetTagBody } from '@ferlab/next/lib/sets/types';
 import { jest } from '@jest/globals';
@@ -48,7 +48,6 @@ const { createSet, deleteSet, getSets, SubActionTypes, updateSetContent, updateS
 const { getStatistics } = await import('./endpoints/statistics');
 const { default: buildApp } = await import('./app');
 
-//todo: fix tests
 describe('Express app', () => {
   let app: Express;
   let keycloakFakeConfig;
