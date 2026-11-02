@@ -7,7 +7,7 @@ import { StatusCodes } from 'http-status-codes';
 import { Keycloak } from 'keycloak-connect';
 import NodeCache from 'node-cache';
 
-import packageJson from '../package.json' assert { type: 'json' };
+import packageJson from '../package.json' with { type: 'json' };
 import { cacheTTL, esHost, keycloakURL, usersApiURL } from './config/env';
 import { getExtendedMapping } from './endpoints/extendedMapping';
 import genomicFeatureSuggestions, { SUGGESTIONS_TYPES } from './endpoints/genomicFeatureSuggestions';

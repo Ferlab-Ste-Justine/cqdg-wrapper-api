@@ -1,0 +1,7 @@
+{
+  "name": "chromedriver",
+  "version": "0.0.0-stub",
+  "private": true,
+  "description": "Empty stand-in for keycloak-connect's optional chromedriver dependency (only used by its own tests). Avoids pulling in vulnerable transitive packages (extract-zip, axios, ip-address, basic-ftp).",
+  "license": "Apache-2.0"
+}
