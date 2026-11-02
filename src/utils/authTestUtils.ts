@@ -45,8 +45,16 @@ DBqvn2kUDFoJHt8Bbh/c8sQ2kXY59CZPgJIEhLYexiAKaufg3X5Lww==
 `;
 
 // eslint-disable-next-line max-len
-export const publicKey = `MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJgoVgqi7/C9uSoUsfQeep2Dbw5HfXWQIyypg+XZ3NqsxTA2k2Fr2vmBu82iGsNgwWBKac5IOzSGvyob1l64MkUCAwEAAQ==`;
+export const publicKey = `MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAlT1N/rDYaseo7iZAFOapWsKBfrKviDJMJSx1ZymAza7jt81WUZJmk3+tWVem81E0D4agtHauT5Jd+mL/pDsDDQWVmn/vgKFvpnaIdTub8Zd4eh1Hws7Q2QZPFo+5qvDAKUZgTjAqg4JO3mUlZiuRrcZAoI6F8UCflwgohq+UVhBt8jaWmyecctwXNf0aFZQXYOBdWoBBfJtWRGD8XNwgDcp6DwwHfRAElW8z8T73z1gcbk4jCj9BUJTTF5GrhMvLWjcuTsqa/cVc2R3L2ypdsCd3gs8bf9L7tXxgJeSUXQLtpm+LCJkh8p2MzsP7H+dMvx65SqZTDBgg5TL21ub/stVB0mCSSuI+dM9GInrTFCo5pnDqruwCDXOQzbDOV3WCzLOIjulczN76hAbNZXINi94XV9OsHJhiM/mHyO3yRIeDl79M5VcuyOudo8UfxulyU/M5bDrXxt4xU6WsZiBVAkiXy9V7LGxKqtBjzPUWLa3rSDz4RSTzmBd3ot1ZjUjzAgMBAAE=`;
 
+/**
+ * Build a JWT signed with the test private key, accepted by the test Keycloak config.
+ *
+ * @param expire - Token lifetime, in seconds.
+ * @param sub - User id, stored in the "sub" claim.
+ * @param roles - Keycloak realm roles, e.g. ['ADMIN'].
+ * @returns The signed token, to send as `Authorization: Bearer <token>`.
+ */
 export const getToken = (expire = 1000, sub = '12345-678-90abcdef', roles = []) =>
   jwt.sign(
     {
