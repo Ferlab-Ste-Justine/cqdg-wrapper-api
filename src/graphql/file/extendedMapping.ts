@@ -1629,7 +1629,7 @@ const extendedMapping = [
     type: 'keyword',
     displayName: 'Dataset',
     active: false,
-    isArray: false,
+    isArray: true,
     primaryKey: false,
     quickSearchEnabled: false,
     unit: null,
