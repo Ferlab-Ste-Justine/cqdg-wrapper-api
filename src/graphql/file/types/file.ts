@@ -14,6 +14,7 @@ import { BiospecimensType } from '#src/graphql/biospecimen/types/biospecimen';
 import { ParticipantsType } from '#src/graphql/participant/types/participant';
 import { StudyType } from '#src/graphql/study/types/study';
 
+import { resolveDataset } from '../datasetResolver';
 import extendedMapping from '../extendedMapping';
 import filesResolver, { hitsResolverNested } from '../resolver';
 import FileAgg from './fileAgg';
@@ -28,7 +29,7 @@ export const FileType: GraphQLObjectType = new GraphQLObjectType({
     biospecimen_reference: { type: GraphQLString },
     data_category: { type: GraphQLString },
     data_type: { type: GraphQLString },
-    dataset: { type: GraphQLString },
+    dataset: { type: new GraphQLList(GraphQLString), resolve: resolveDataset },
     ferload_url: { type: GraphQLString },
     file_format: { type: GraphQLString },
     file_hash: { type: GraphQLString },
