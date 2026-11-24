@@ -877,7 +877,7 @@ const extendedMapping: I_ExtendedMappingSetFieldInput[] = [
     type: 'keyword',
     displayName: 'Files Dataset',
     active: false,
-    isArray: false,
+    isArray: true,
     primaryKey: false,
     quickSearchEnabled: false,
     unit: null,
